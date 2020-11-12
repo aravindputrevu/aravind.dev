@@ -8,7 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: sudo npm update -g && npm install && gatsby clean && gatsby build
+      - run: |
+          sudo npm update -g 
+          sudo npm install -g gatsby-cli
+          gatsby -v
+          npm install 
+          gatsby clean 
+          gatsby build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'

@@ -9,9 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          sudo npm update -g 
-          sudo npm install -g gatsby-cli
-          gatsby -v
+          sudo npm install gatsby-cli
+          sudo gatsby -v
           npm install 
           gatsby clean 
           gatsby build

@@ -119,6 +119,13 @@ export const pageQuery = graphql`
             }
           }
         }
+        featuredImage {
+          childImageSharp {
+            fixed(width: 1200, height: 628) {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
       }
     }
   }

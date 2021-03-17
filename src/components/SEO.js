@@ -19,8 +19,8 @@ export default function SEO({
     title = postMeta.title
     description = postNode.excerpt
 
-    if (postMeta.thumbnail) {
-      image = postMeta.thumbnail.childImageSharp.fixed.src
+    if (postMeta.featuredImage) {
+      image = postMeta.featuredImage.childImageSharp.fixed.src
     }
 
     postURL = `${config.siteUrl}${postPath}`
@@ -87,7 +87,7 @@ export default function SEO({
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
 
-      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:creator" content={config.userTwitter} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />

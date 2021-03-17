@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "target": "aravind-dev",
     "public": "public",
+    "target": "aravind-dev",
     "ignore": [
       "firebase.json",
       "**/.*",

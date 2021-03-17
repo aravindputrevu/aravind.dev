@@ -3,6 +3,7 @@ date: 2021-03-16
 title: 'Everything you need to know about index in Elasticsearch!'
 template: post
 thumbnail: '../thumbnails/elastic.png'
+featuredImage: '../images/post-images/everything-index-elastic/es-index-cluster.png'
 description: This blog post specifically talks about the core of Elasticsearch data storage concept - Index.
 slug: everything-index-elastic
 tags:

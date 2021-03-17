@@ -43,7 +43,7 @@ One can query multiple indices too.
  - Cannot be `.` or `..`
  - Cannot be longer than 255 bytes (note it is bytes, so multi-byte characters will count towards the 255 limit faster)
 
-> Note: One will still see indices starting with `.` because of system indices like .security, .kibana, or Indices created by a Datastream, Elastic App Search, or Elastic Agent. These are system indices. 
+> Note: One will still see indices starting with `.` because of system indices like .security, .kibana, or Indices created by a Data stream, Elastic App Search, or Elastic Agent. These are system indices. 
 
 ## Index naming strategy
 
@@ -93,6 +93,10 @@ It means one can enable or disable the dynamic mapping even make it `strict` to 
  - If needed to change, data needs to be reindexed.
     - **Method 1:** One could use an alias for a field name and swap to new fields, deprecating the documents' old field.
     - **Method 2:** Create another index with the desired field data type + existing fields in the document, field names, then reindex the data.
+
+Elasticsearch attempts to index all of the fields client sends, but sometimes if you don't want specific fields to be indexed, set `enabled` field to `false` and those fields will not be prepared for querying (can also be called not-indexed, unindexed). 
+
+> Note: enabled setting can be applied at the top level for the entire document that client sends in OR to the field which contains `object` data type.
 
 ## Mapping Explosion
 
@@ -144,7 +148,9 @@ Index templates are settings that get applied when an index with a specific patt
 
 ![Elasticsearch index templates](../images/post-images/everything-index-elastic/es-templates.png)
 
-Index templates contain settings like how many shards and replicas the index should initialize with, what mapping settings, aliases to use. One can also assign priority to the index template, which we will discuss while talking about Data streams. 🙂
+Index templates contain settings like how many shards and replicas the index should initialize with, what mapping settings, aliases to use. One can also assign priority to the index template. 100 is the default priority. 
+
+Elastic has built-in index templates which maps to index/datastream patterns `logs-*-*`,`metrics-*-*`, `synthetics-*-*`, which have default priority of 100. To create index template's which overrides the built-in index templates but use the same patterns, assign a priority that is above 100. To disable the built-in index and component templates, set the `stack.templates.enabled` to `false`
 
 Component templates are nothing but building blocks for index templates. Create an alias component template, settings component template, or a mapping component template and use them via the "composed_of" parameter. 
 
@@ -178,13 +184,13 @@ The analyzer is configured via the PUT index settings API. You can test how the 
 
 ## What is the future for time-series indexing?
 
-To further simplify time-series data indexing and management, Elastic introduced a concept called **Data streams**. Data streams essentially are a collection of hidden indices created and managed entirely by Elasticsearch. 
+To further simplify time-series data indexing and management, Elastic introduced a concept called **Data streams**. Data streams are a collection of hidden indices created and managed entirely by Elasticsearch. 
 
-![Elasticsearch datastreams](../images/post-images/everything-index-elastic/es-data-stream.png)
+![Elasticsearch data streams](../images/post-images/everything-index-elastic/es-data-stream.png)
 
-Essentially, the client does not talk to an index but to a Data stream for everything. 
+Essentially, the client does not talk to an index but to a Data stream for everything. Each Data stream should have a matching index template which is made up of component templates (index setttings, mappings, aliases). 
 
-Datastreams are integrated into all the concepts explained above in the blog post, such as ILM, index settings, index templates. 
+Data streams are integrated into all the concepts explained above in the blog post, such as ILM, index settings, index templates. 
 
 Thanks for reading it through. If you have specific questions, reach me out at [Twitter](https://twitter.com/aravindputrevu).
 

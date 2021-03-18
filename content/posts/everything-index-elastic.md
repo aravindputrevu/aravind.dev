@@ -150,9 +150,9 @@ Index templates are settings that get applied when an index with a specific patt
 
 Index templates contain settings like how many shards and replicas the index should initialize with, what mapping settings, aliases to use. One can also assign priority to the index template. 100 is the default priority. 
 
-Elastic has built-in index templates which maps to index/datastream patterns `logs-*-*`,`metrics-*-*`, `synthetics-*-*`, which have default priority of 100. To create index template's which overrides the built-in index templates but use the same patterns, assign a priority that is above 100. To disable the built-in index and component templates, set the `stack.templates.enabled` to `false`
-
 Component templates are nothing but building blocks for index templates. Create an alias component template, settings component template, or a mapping component template and use them via the "composed_of" parameter. 
+
+Elastic has built-in index templates which maps to index/datastream patterns `logs-*-*`,`metrics-*-*`, `synthetics-*-*`, which have default priority of 100. To create index template's which overrides the built-in index templates but use the same patterns, assign a priority that is above 100. To disable the built-in index and component templates, set the `stack.templates.enabled` to `false`
 
 ## Index Lifecycle Management (ILM)
 
@@ -192,6 +192,6 @@ Essentially, the client does not talk to an index but to a Data stream for every
 
 Data streams are integrated into all the concepts explained above in the blog post, such as ILM, index settings, index templates. 
 
-Thanks for reading it through. If you have specific questions, reach me out at [Twitter](https://twitter.com/aravindputrevu).
+Thanks for reading it through. If you have specific questions, reach me out at [Twitter](https://twitter.com/aravindputrevu) or ask your question below :D 
 
 

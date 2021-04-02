@@ -3,7 +3,7 @@ date: 2021-04-01
 title: 'How to maintain data security & tackle data leaks?'
 template: post
 thumbnail: '../thumbnails/shield.png'
-featuredImage: '../images/post-images/.png'
+featuredImage: '../images/post-images/data-leak.jpg'
 description: Because of increasing data leaks, attacks on organizations by nation-state actors, data security is essential. This article gives an overview of processes one needs to establish, talks about what is at stake. 
 slug: data-leaks-tips
 tags:
@@ -34,7 +34,9 @@ There are many more leaks in recent years ranging from leaking location info of 
 
 > Security is a mindset and not a process!
 
-Often I see many think about Security as a step to review or a checkbox. It is neither. Security is a mindset that the organization should adopt right from the founders, C-level, to developers. As much as the team needs to be motivated by its mission, it is equally essential to provide a secure customer experience. A safe customer experience invokes trust, transparency. Once you get in on a trust cycle with your customer, you could avoid churn from the platform forever—for example, Apple's iPhone.
+Often I see many think about Security as a step to review or a checkbox. It is neither. 
+
+Security is a mindset that the organization should adopt right from the founders, C-level, to developers. As much as the team needs to be motivated by its mission, it is equally essential to provide a secure customer experience. A safe customer experience invokes trust, transparency. Once you get in on a trust cycle with your customer, you could avoid churn from the platform forever—for example, Apple's iPhone.
 
 Most founders in India build the brand, do customer acquisition campaigns, focus on GTM's but forget how a simple data security lapse can cause distrust and hurt growth forever... 
 

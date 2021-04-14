@@ -3,7 +3,7 @@ date: 2021-04-11
 title: 'Test driving Elasticsearch Index Lifecycle Management with Data streams'
 template: post
 thumbnail: '../thumbnails/elastic.png'
-featuredImage: '../images/post-images/elastic-ilm-test/hot-warm-ilm.png'
+featuredImage: '../images/post-images/elastic-ilm-test/hot-warm-ilm.jpg'
 description: 
 slug: elastic-ilm-test
 tags:

@@ -2,6 +2,7 @@
 date: 2021-04-03
 title: 'A new way to index time-series data into Elasticsearch!'
 template: post
+hidden: false
 thumbnail: '../thumbnails/elastic.png'
 featuredImage: '../images/post-images/everything-index-elastic/es-data-stream.png'
 description: 
@@ -10,6 +11,7 @@ tags:
   - elasticsearch
   - data-stream
   - observability
+  - tech
 ---
 
 ## Introduction

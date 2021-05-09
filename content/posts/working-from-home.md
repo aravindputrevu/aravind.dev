@@ -2,6 +2,7 @@
 date: 2020-09-11
 title: 'Working from Home'
 template: post
+hidden: false
 thumbnail: '../thumbnails/wfh.png'
 slug: working-from-home
 categories:

@@ -2,6 +2,7 @@
 date: 2021-04-08
 title: 'Should India open vaccination for all?'
 template: post
+hidden: false
 thumbnail: '../thumbnails/heartbeat.png'
 featuredImage: '../images/post-images/covid-vaccine.jpeg'
 description: 

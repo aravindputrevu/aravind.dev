@@ -1,6 +1,7 @@
 ---
 date: 2020-10-04
 title: 'Should Coding be mandatory?'
+hidden: false
 template: post
 thumbnail: '../thumbnails/binary.png'
 slug: kid-coding-mandatory

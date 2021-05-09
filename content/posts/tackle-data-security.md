@@ -2,12 +2,14 @@
 date: 2021-04-01
 title: 'How to maintain data security & tackle data leaks?'
 template: post
+hidden: false
 thumbnail: '../thumbnails/shield.png'
 featuredImage: '../images/post-images/data-leak.jpg'
 description: Because of increasing data leaks, attacks on organizations by nation-state actors, data security is essential. This article gives an overview of processes one needs to establish, talks about what is at stake. 
 slug: data-leaks-tips
 tags:
   - data-security
+  - tech
 ---
 
 I was seriously disturbed to see yet another [data leak](https://www.businesstoday.in/current/corporate/hackers-allege-data-35-million-mobikwik-users-up-for-sale-on-dark-web-company-junks-claims/story/435196.html) from a mobile wallet company. More difficult they have [denied](https://twitter.com/MobiKwik/status/1367489330902675463?s=20) it, outright! 

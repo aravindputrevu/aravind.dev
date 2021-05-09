@@ -2,6 +2,7 @@
 date: 2021-04-11
 title: 'Test driving Elasticsearch Index Lifecycle Management with Data streams'
 template: post
+hidden: false
 thumbnail: '../thumbnails/elastic.png'
 featuredImage: '../images/post-images/elastic-ilm-test/hot-warm-ilm.jpg'
 description: 
@@ -10,6 +11,7 @@ tags:
   - elasticsearch
   - observability
   - cloud
+  - tech
 ---
 
 Everything in Elasticsearch goes to an Index. The data, settings of various Kibana dashboards, monitoring information of Elasticsearch cluster. 

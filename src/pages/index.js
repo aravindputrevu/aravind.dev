@@ -107,7 +107,7 @@ export default function BlogIndex({ data }) {
             
           </p>
           <a
-            href="https://putrevu.substack.com/subscribe"
+            href="https://www.getrevue.co/profile/aravind"
             target="_blank"
             rel="noreferrer"
             className="button"
@@ -125,7 +125,7 @@ export const pageQuery = graphql`
     latest: allMarkdownRemark(
       limit: 5
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { template: { eq: "post" } } }
+      filter: { frontmatter: { template: { eq: "post" }, tags: { eq: "tech" } , hidden: { eq: false } } }
     ) {
       edges {
         node {

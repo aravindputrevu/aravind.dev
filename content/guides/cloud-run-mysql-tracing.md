@@ -4,7 +4,7 @@ title: Tracing a Java, MySQL Application deployed on Google Cloud Run
 slug: cloud-run-mysql-tracing
 template: post
 description: A guide on Tracing a Java app deployed in a managed serverless service called Cloud Run. 
-thumbnail: '../thumbnails/elastic.png'
+thumbnail: '../thumbnails/google-cloud-run.png'
 featuredImage: '../images/post-images/cloud-run-mysql-tracing/cloud-run-high-arch.png'
 categories:
   - Guides

@@ -124,7 +124,7 @@ Click on "Open Editor" in the Cloud Shell. This editor is an OSS project called 
 Clone the repository to the workspace by using the cloud shell or by creating a new terminal. You will get a finished project by cloning the below repo. You just need to add the relevant configuration details. 
 
 ```json
-git clone https://github.com/aravindputrevu/elastic-cloud-samples/elastic-apm/cloud-run-sql
+git clone https://github.com/aravindputrevu/elastic-cloud-samples.git
 ```
 
 ### Dependencies

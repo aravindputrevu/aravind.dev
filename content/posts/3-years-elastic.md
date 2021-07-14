@@ -2,6 +2,7 @@
 date: 2020-12-03
 title: 'Three years!'
 template: post
+hidden: false
 thumbnail: '../thumbnails/elastic.png'
 featuredImage: '../images/post-images/elastic-3-years.jpg'
 slug: three-years-elastic

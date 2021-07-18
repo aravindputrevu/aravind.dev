@@ -124,6 +124,62 @@ section > h2 {
   max-width: 600px;
 }
 
+.newsletter-subscribe-button {
+  font-family: Roboto;
+  font-size: 18px;
+  line-height: 12px;
+  font-weight: 500;
+  font-style: normal;
+  text-decoration: none;
+  text-transform: none;
+  color: #ffffff;
+  background-color: #4a86e8;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-style: none;
+  border-color: #fafafa;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.newsletter-container {
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 20px;
+  border-top-width: 5px;
+  border-left-width: 5px;
+  border-right-width: 5px;
+  border-bottom-width: 5px;
+  text-align: center;
+}
+
+.newsleter-form-field {
+  font-family: Roboto;
+  font-size: 18px;
+  line-height: 14px;
+  font-weight: 400;
+  font-style: normal;
+  text-align: left;
+  padding-right: 4px;
+  padding-left: 4px;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  border-color: #5D7CFA;
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom-style: solid;
+  border-left-style: none;
+
+}
+
+div.revue-form-group {
+  padding-top: 11px;
+}
+
 @media screen and (min-width: 800px) {
   .container {
     padding: 0 2rem;

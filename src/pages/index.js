@@ -102,18 +102,18 @@ export default function BlogIndex({ data }) {
           <Guides data={videos} frontPage />
         </Section>
         
-        <Section title="Newsletter">
-          <p>
-            
-          </p>
-          <a
-            href="https://www.getrevue.co/profile/aravind"
-            target="_blank"
-            rel="noreferrer"
-            className="button"
-          >
-            <span className="emoji">💌</span> Subscribe to Newsletter
-          </a>
+        <Section>
+        <div id="revue-embed" className="newsletter-container">
+            <form action="http://newsletter.aravind.dev/add_subscriber" method="post" id="revue-form" name="revue-form"  target="_blank">
+                <div id="newsletter-text" className="">
+                   <label for="member_email"><b>Want to read similar articles? Subscribe to my newsletter</b></label>
+                </div>
+                <div class="revue-form-group">
+                    <input class="newsleter-form-field" placeholder="Your email address..." type="email" name="member[email]" id="member_email"></input>
+                    <input type="submit" className="newsletter-subscribe-button" value="Subscribe" name="member[subscribe]" id="member_submit"></input>
+                </div>
+            </form>
+          </div>
         </Section>
       </div>
     </Layout>

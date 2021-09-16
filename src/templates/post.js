@@ -86,17 +86,6 @@ export default function PostTemplate({ data, pageContext }) {
               </div>
             )
           }
-          <div id="revue-embed" className="newsletter-container">
-            <form action="http://newsletter.aravind.dev/add_subscriber" method="post" id="revue-form" name="revue-form"  target="_blank">
-                <div id="newsletter-text" className="">
-                   <label for="member_email"><b>Want to read similar articles? Subscribe to my newsletter or see a sample <a href="https://newsletter.aravind.dev">here</a></b></label>
-                </div>
-                <div class="revue-form-group">
-                    <input class="newsleter-form-field" placeholder="Your email address..." type="email" name="member[email]" id="member_email"></input>
-                    <input type="submit" className="newsletter-subscribe-button" value="Subscribe" name="member[subscribe]" id="member_submit"></input>
-                </div>
-            </form>
-          </div>
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
           <div id="revue-embed" className="newsletter-container">
             <form action="http://newsletter.aravind.dev/add_subscriber" method="post" id="revue-form" name="revue-form"  target="_blank">

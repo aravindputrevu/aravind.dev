@@ -157,6 +157,13 @@ section > h2 {
   text-align: center;
 }
 
+.newletter-container-size {
+  width: 760px;
+  height: 150px;
+  border: "1px solid #EEE";
+  background: "white"
+}
+
 .newsleter-form-field {
   font-family: Roboto;
   font-size: 18px;

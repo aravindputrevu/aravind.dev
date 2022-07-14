@@ -73,7 +73,7 @@ export default function BlogIndex({ data }) {
               <Link to="/about">about me</Link>.
 
             </p>
-            <a href="https://twitter.com/aravindputrevu?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="medium" data-text="Follow me" data-show-count="true">Follow @aravindputrevu</a>
+            <a href="https://twitter.com/aravindputrevu?ref_src=twsrc%5Etfw" className="twitter-follow-button" data-size="medium" data-text="Follow me" data-show-count="true">Follow @aravindputrevu</a>
           </div>
           <div className="image">
             <img src={aravind} alt="Aravind" />
@@ -103,17 +103,11 @@ export default function BlogIndex({ data }) {
         </Section>
         
         <Section>
-        <div id="revue-embed" className="newsletter-container">
-            <form action="http://newsletter.aravind.dev/add_subscriber" method="post" id="revue-form" name="revue-form"  target="_blank">
-                <div id="newsletter-text" className="">
-                   <label for="member_email"><b>Want to read similar articles? Subscribe to my newsletter</b></label>
-                </div>
-                <div class="revue-form-group">
-                    <input class="newsleter-form-field" placeholder="Your email address..." type="email" name="member[email]" id="member_email"></input>
-                    <input type="submit" className="newsletter-subscribe-button" value="Subscribe" name="member[subscribe]" id="member_submit"></input>
-                </div>
-            </form>
-          </div>
+        <div className="newsletter-container">
+        Join 1000+ developers to hear stories from Open source, developer conferences, and technology.
+        <iframe className=".newsletter-container-size" src="https://devshorts.substack.com/embed" frameBorder="0" scrolling="no">
+        </iframe>
+        </div>
         </Section>
       </div>
     </Layout>

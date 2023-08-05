@@ -19,3 +19,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TEST_713FA }}'
           channelId: live
           projectId: test-713fa
+          target: aravind-dev

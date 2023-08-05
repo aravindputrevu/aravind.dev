@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "test-713fa"
+  },
+  "targets": {
+    "test-713fa": {
+      "hosting": {
+        "aravind-dev": [
+          "test-713fa"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

@@ -13,7 +13,7 @@ tags:
   - tech
 ---
 
-At a company I worked in, A senior leader used to start the town hall or quarterly business review meetings with, "**_Think, if this is your company..._**" 
+At a company I worked in, A senior leader used to start the town hall or quarterly business review meetings with, "**_Think, if this is your company..._**"
 
 During a restructuring, he got laid off; the man dedicated his day and night to bringing the product to seven-digit revenue. 
 

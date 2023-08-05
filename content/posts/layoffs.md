@@ -21,7 +21,7 @@ During a restructuring, he got laid off; the man dedicated his day and night to 
 
 Some time ago, my ex-employer Elastic laid off 13% of staff. I left Elastic two weeks before the layoff. When I was leaving, there were no signs of layoffs. Instead, I was assured that layoffs would not happen. 
 
-Around the same time, GitHub laid off their  India engineering team; roughly 100 engineers were laid off, and the team was built in the last few years. 
+Around the same time, GitHub laid off their  India engineering team; roughly 100 engineers were laid off, and the team was built in the last few years.
 
 ...
 

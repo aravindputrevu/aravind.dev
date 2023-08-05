@@ -10,6 +10,7 @@ tags:
   - layoff
   - founder
   - startups
+  - tech
 ---
 
 At a company I worked in, A senior leader used to start the town hall or quarterly business review meetings with, "**_Think, if this is your company..._**" 

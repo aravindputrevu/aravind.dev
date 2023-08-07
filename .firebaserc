@@ -1,12 +1,10 @@
 {
-  "projects": {
-    "default": "test-713fa"
-  },
+  "projects": {},
   "targets": {
     "test-713fa": {
       "hosting": {
         "aravind-dev": [
-          "test-713fa"
+          "aravind-dev"
         ]
       }
     }

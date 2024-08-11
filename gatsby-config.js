@@ -123,7 +123,7 @@ module.exports = {
       options: {
         plugins: [
           {
-            resolve: `gatsby-remark-table-of-contents`,
+            resolve: `gatsby-remark-table-of--contents`,
             options: {
               exclude: "Table of Contents",
               tight: false,

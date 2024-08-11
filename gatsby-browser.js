@@ -12,3 +12,9 @@ exports.onInitialClientRender = () => {
     head.appendChild(link)
   }
 }
+
+exports.onRouteUpdate = ({ location, prevLocation }) => {
+  if (prevLocation !== null) {
+    window.scrollTo(0, 0)
+  }
+}

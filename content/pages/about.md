@@ -13,7 +13,21 @@ I believe technology can help change human lives in a positive way! I’m passio
 
 ![Me](../images/aravind-2020.jpg)
 
-## Work
+### 2024
+
+#### Work
+
+Helping founders in their 0-1 journey on developer go-to-market.
+
+#### Life
+
+Nearly a nomad, oscillating between Bangalore, San Francisco Bay Area and Amsterdam. 
+
+
+### 2022
+
+
+#### Work
 
 I’m a Developer who codes in multiple programming languages.
 
@@ -23,6 +37,6 @@ I like working on Distributed Systems which form a team to solve complex problem
 
 I worked on Financial Systems which detect Fraud, Anti-Virus software for Datacenter.
 
-## Life
+#### Life
 
 Based out of `Silicon valley of India`, Bangalore, India. I enjoy travelling and meeting new people, potentially discussing all sorts of things.

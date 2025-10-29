@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/thumbnails/favicon.png"><meta name="generator" content="Astro v4.16.19"><title>Everything you need to know about index in Elasticsearch! - Aravind Putrevu</title><meta name="description" content="Everything you need to know about index in Elasticsearch!"><link rel="sitemap" href="/sitemap-index.xml"><!-- Open Graph / Social Media --><meta property="og:title" content="Everything you need to know about index in Elasticsearch! - Aravind Putrevu"><meta property="og:description" content="Everything you need to know about index in Elasticsearch!"><meta property="og:type" content="website"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@aravindputrevu"><meta name="twitter:title" content="Everything you need to know about index in Elasticsearch! - Aravind Putrevu"><meta name="twitter:description" content="Everything you need to know about index in Elasticsearch!"><link rel="stylesheet" href="/_astro/_slug_.D1oAbOhf.css">
+<style>.article-header[data-astro-cid-fzx4jmue]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:2px solid #eee}.article-header[data-astro-cid-fzx4jmue] h1[data-astro-cid-fzx4jmue]{margin-bottom:.5rem}.article-header[data-astro-cid-fzx4jmue] time[data-astro-cid-fzx4jmue]{color:#666;font-size:.9rem}.tags[data-astro-cid-fzx4jmue]{display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap}.tag[data-astro-cid-fzx4jmue]{background:#f0f0f0;padding:.25rem .75rem;border-radius:3px;font-size:.85rem}.post-content[data-astro-cid-fzx4jmue]{line-height:1.8}
+</style><script type="module">const d=localStorage.getItem("theme");d==="dark"&&document.documentElement.classList.add("dark");const e=document.getElementById("dark-mode-button"),o=localStorage.getItem("theme");o==="dark"&&(document.documentElement.classList.add("dark"),e&&(e.textContent="☀️"));e?.addEventListener("click",()=>{if(document.documentElement.classList.contains("dark"))document.documentElement.classList.remove("dark"),localStorage.removeItem("theme"),document.querySelector("#dark-mode")?.remove(),e.textContent="🌙";else{document.documentElement.classList.add("dark"),localStorage.setItem("theme","dark"),e.textContent="☀️";const n=document.getElementsByTagName("head")[0],t=document.createElement("link");t.rel="stylesheet",t.id="dark-mode",t.href="/dark.css",n.appendChild(t)}});
+</script></head> <body> <nav class="navbar"> <div class="container"> <div class="flex"> <div> <a href="/" class="brand"> <span class="emoji"> <img src="/images/code-flat.png" alt="code"> </span> 
+Aravind Putrevu
+</a> </div> <div class="flex"> <a href="/blog">Blogs</a> <a href="/guides">Tech Guides</a> <a href="/about">About</a> <button id="dark-mode-button">🌙</button> </div> </div> </div> </nav>  <main>  <article class="container" data-astro-cid-fzx4jmue> <header class="article-header" data-astro-cid-fzx4jmue> <h1 data-astro-cid-fzx4jmue>Everything you need to know about index in Elasticsearch!</h1> <time data-astro-cid-fzx4jmue>March 16, 2021</time> <div class="tags" data-astro-cid-fzx4jmue> <span class="tag" data-astro-cid-fzx4jmue>elasticsearch</span><span class="tag" data-astro-cid-fzx4jmue>elastic-stack</span><span class="tag" data-astro-cid-fzx4jmue>getting-started</span><span class="tag" data-astro-cid-fzx4jmue>tech</span> </div> </header> <div class="post-content" data-astro-cid-fzx4jmue> <p><img src="/images/post-images/everything-index-elastic/es-index.png" alt="Elasticsearch Index"></p>
+<h2 id="what-is-index">What is Index?</h2>
+<p><img src="/images/post-images/everything-index-elastic/es-index-cluster.png" alt="Elasticsearch Index Clustering"></p>
+<p>Elasticsearch is a distributed Search engine. The data is stored and spread across various nodes. Indexes are the ones that hold that data <em>logically</em> (physical data is in shards).</p>
+<p><img src="/images/post-images/everything-index-elastic/es-indx-shard.png" alt="Elasticsearch Index &#x26; Shard"></p>
+<h2 id="what-is-so-special-about-it">What is so special about it?</h2>
+<blockquote>
+<p>RDBMS : Table :: Elasticsearch : Index</p>
+</blockquote>
+<p>All the APIs are addressed to an index, just like all queries are on the table.</p>
+<p><img src="/images/post-images/everything-index-elastic/es-sql-dsl.png" alt="Elasticsearch Query Langs"></p>
+<p>One can query multiple indices too.</p>
+<blockquote>
+<p>Note: Elasticsearch accepts multiple query languages like SQL, EQL, and QueryDSL to query data in the indices.</p>
+</blockquote>
+<h2 id="index-naming-rules">Index naming rules</h2>
+<ul>
+<li>Lowercase only</li>
+<li>Cannot include <code>\</code>, <code>/</code>, “, <code>?</code>, <code>"</code>, <code>&#x3C;</code>, <code>></code>, <code>|</code>, <code> </code> (space character), <code>,</code>, <code>#</code></li>
+<li>Indices prior to 7.0 could contain a colon (<code>:</code>), but that has been deprecated and will not be supported in 7.0+</li>
+<li>Cannot start with “, <code>_</code>, <code>+</code></li>
+<li>Cannot be <code>.</code> or <code>..</code></li>
+<li>Cannot be longer than 255 bytes (note it is bytes, so multi-byte characters will count towards the 255 limit faster)</li>
+</ul>
+<blockquote>
+<p>Note: One will still see indices starting with <code>.</code> because of system indices like .security, .kibana, or Indices created by a Data stream, Elastic App Search, or Elastic Agent. These are system indices.</p>
+</blockquote>
+<h2 id="index-naming-strategy">Index naming strategy</h2>
+<p>For time-series data such as logs, metrics, traces., Elastic’s Beats or Logstash, write data into Elasticsearch with default index names like <code>filebeat-0001</code> or <code>logstash-%{+yyyy.MM.dd}</code>. It automatically increments the index name after a specific data limit. These defaults also help in managing data with other features like Index/Snapshot Lifecycle Management Policies.</p>
+<p>If one has a strong opinion about creating indices with naming strategies, go ahead to create your own, but think about the scaling strategy.</p>
+<p>Keeping with defaults helps one can correlating the data (ECS) easily and leverage all the inbuilt features.</p>
+<p><strong>Note:</strong> For search engines, the index name can be anything like, for example, products, hospitals_inventory.</p>
+<h2 id="categories-of-data-stored-in-indices">Categories of Data stored in Indices</h2>
+<p>Indices store different data categories, although, remember, each data has a different volume, tenure.</p>
+<ul>
+<li>Time series (Data indexed in the order of time)
+<ul>
+<li>Logs</li>
+<li>Metrics</li>
+<li>Traces</li>
+<li>Security Events</li>
+</ul>
+</li>
+<li>Content
+<ul>
+<li>PDFs, Spreadsheets, PPT’s etc</li>
+<li>Data from RDBMS</li>
+</ul>
+</li>
+</ul>
+<p><strong>Note:</strong> Everything is a JSON document in Elasticsearch. Be it logs, metrics, traces, PDFs, PPT’s. There are libraries or ingestion tools like <a href="https://www.elastic.co/beats/">Beats</a>, <a href="https://www.elastic.co/logstash">Logstash</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/client/index.html">Language Clients</a> to help with that.</p>
+<h2 id="index-data-mapping">Index Data Mapping</h2>
+<p>Perhaps, the most critical section in this blog. 🙂</p>
+<p>Elasticsearch prepares the data for search/query operations while ingesting the data. It is also called “Schema on Write.” It is like creating the schema dynamically/explicitly while defining inserting the record in a SQL Table.</p>
+<p>One can also do “Schema on Read,” which means preparing or fetching the data while querying with Runtime fields.</p>
+<p><img src="/images/post-images/everything-index-elastic/es-data-mapping.png" alt="Elasticsearch Index Data Mapping"></p>
+<h4 id="dynamic">Dynamic</h4>
+<p>It happens on the fly as and when we ingest the data. It can be set to false, true, runtime, strict.</p>
+<p>It means one can enable or disable the dynamic mapping even make it <code>strict</code> to follow a specific set of schema, otherwise reject the client’s documents for ingestion.</p>
+<h4 id="explicit">Explicit</h4>
+<ul>
+<li>Can be set like an RDBMS Table while creating the index</li>
+<li>Once defined, it can only be changed based on the mapping parameters.</li>
+<li>If needed to change, data needs to be reindexed.
+<ul>
+<li><strong>Method 1:</strong> One could use an alias for a field name and swap to new fields, deprecating the documents’ old field.</li>
+<li><strong>Method 2:</strong> Create another index with the desired field data type + existing fields in the document, field names, then reindex the data.</li>
+</ul>
+</li>
+</ul>
+<p>Elasticsearch attempts to index all of the fields client sends, but sometimes if you don’t want specific fields to be indexed, set <code>enabled</code> field to <code>false</code> and those fields will not be prepared for querying (can also be called not-indexed, unindexed).</p>
+<blockquote>
+<p>Note: enabled setting can be applied at the top level for the entire document that client sends in OR to the field which contains <code>object</code> data type.</p>
+</blockquote>
+<h2 id="mapping-explosion">Mapping Explosion</h2>
+<p>A mapping explosion occurs when a document has too many fields in an index.</p>
+<p>Imagine 20 different teams (each team coding for a microservice of the more significant application) using the same Elasticsearch cluster and pushing their application logs to the same index.</p>
+<p>Now each development team might be coding in a different programming language, and the language itself might have a different logging structure based on the logging framework used.</p>
+<p>Thus, each team might have a different log schema and fields, creating too many fields for a doc in the same index. It is like one SQL table having more than 1000 columns.</p>
+<p>So, how many recommended fields per doc in a single index? 1000 fields are the max limit.</p>
+<p>Of course, by modifying the <code>index.mapping.total_fields.limit</code> setting field limit can be changed.</p>
+<p>It also does not mean Elastiscearch is unable to handle more data.  Keep all the data in <code>_source</code> field and use something like <em>runtime</em> fields if you want to query data.</p>
+<p>To effectively avoid all this, few suggestions.</p>
+<h4 id="observabilitysecurity-timeseries-data">Observability/Security (Timeseries data):</h4>
+<p>Elastic has the Elastic Common Schema (ECS) project, which also ships logging library frameworks. Devs can use that to automatically align logs from various sources into a co-relatable schema and standard data shippers like Filebeat. ECS logging libs also allow correlating the logs easily.</p>
+<h4 id="search-engine">Search Engine:</h4>
+<p>Teams building Search usually know what the user is going to search. So, optimizing the results to be queried by the user gives a considerable boost. Finalize the schema before going to production.</p>
+<p>For example, to build a phone number search functionality, we know that the phone numbers are not used for numerical calculations like addition, subtraction.  One could index all the phone numbers with the <code>keyword</code> data type. This schema change helps in boosting the search performance.</p>
+<h2 id="runtime-fields">Runtime Fields:</h2>
+<p>Elasticsearch uses the “Schema on Write” methodology, which enables faster querying, better visualizations. However, if unindexed data in the <code>_source</code> needs to be queried later, you need to reindex to bring that data into a field.</p>
+<p><img src="/images/post-images/everything-index-elastic/es-before-runtime.png" alt="Elasticsearch before runtime field"></p>
+<p>From 7.11, Elastic introduced Runtime fields which help add fields without reindexing the data. Also, many times one cannot predict what the document structure will be in the future.</p>
+<p><img src="/images/post-images/everything-index-elastic/es-after-runtime.png" alt="Elasticsearch after runtime field"></p>
+<p>To create a runtime field, change the dynamic parameter to runtime when defining a field, add a runtime section in mappings, and define it directly in the search request.</p>
+<blockquote>
+<p>Note: Runtime fields use less disk space and provide flexibility in accessing the data but can impact search performance based on the runtime script’s computation.</p>
+</blockquote>
+<h2 id="templates">Templates</h2>
+<p>There are two types of Templates in Elasticsearch: Index Templates, Component Templates.</p>
+<p>Index templates are settings that get applied when an index with a specific pattern gets created, for example, logs-* or app-*.</p>
+<p><img src="/images/post-images/everything-index-elastic/es-templates.png" alt="Elasticsearch index templates"></p>
+<p>Index templates contain settings like how many shards and replicas the index should initialize with, what mapping settings, aliases to use. One can also assign priority to the index template. 100 is the default priority.</p>
+<p>Component templates are nothing but building blocks for index templates. Create an alias component template, settings component template, or a mapping component template and use them via the “composed_of” parameter.</p>
+<p>Elastic has built-in index templates which maps to index/datastream patterns <code>logs-*-*</code>,<code>metrics-*-*</code>, <code>synthetics-*-*</code>, which have default priority of 100. To create index template’s which overrides the built-in index templates but use the same patterns, assign a priority that is above 100. To disable the built-in index and component templates, set the <code>stack.templates.enabled</code> to <code>false</code></p>
+<h2 id="index-lifecycle-management-ilm">Index Lifecycle Management (ILM)</h2>
+<p>Index Lifecycle management helps manage all data in the indices, leverage the underlying hardware capabilities. Time-series Data has different tenures, and only a sizeable chunk needs to be actively queried all the time.</p>
+<blockquote>
+<p>Note: Many users used to use curator, which more or less has similar functionality.  Curator is deprecated and not actively maintained. Please use ILM.</p>
+</blockquote>
+<p><img src="/images/post-images/everything-index-elastic/es-ilm.png" alt="Elasticsearch Index lifecycle management"></p>
+<p>ILM has policies that are instructions configured to execute on indices containing data. These instructions are like triggers that create, rollover, deletes data based on set conditions. There can be multiple ILM policies with different priorities set.</p>
+<p>For example, if you are ingesting 1 GB, logs, metrics, and traces data from the apps and infrastructure. By the end of the month, it becomes 30 GB, quarter: 90 GB, An year: 360+ GB.</p>
+<p>You might not need entire raw data to gather insights, as it does not change with time, but you might be interested in comparing trends. With ILM, you could gather critical insights and rollover the raw data to less expensive hardware-based nodes or delete the cluster’s unneeded data.</p>
+<p>Besides, using the data tiers (hot, warm, cold), you could move the index data to designated nodes and have faster hardware for faster performance. ILM automates this entire process of moving data to different types of nodes.</p>
+<p>You could also configure ILM Policies to snapshot data to a cloud object store like S3, GCS, ACS.</p>
+<blockquote>
+<p><strong>Note:</strong> Kibana offers a comprehensive UI to configure ILM policies and manage data in indices. ILM is also available as an API.</p>
+</blockquote>
+<h2 id="analyzers">Analyzers</h2>
+<p>Every index in Elasticsearch has an analyzer that analyzes the fields marked as <code>text</code> in the field mapping. Standard is the default analyzer in Elasticsearch. An analyzer is a combination of Character Filter, Tokenizer, Token Filter. Elasticsearch offers different built-in analyzers like Simple, Whitespace, Keyword, Language.</p>
+<p>There are 40+ language analyzers for Elasticsearch. That means one can search 40+ languages using Elasticsearch. The analyzer is a core topic and a fascinating one. It warrants a separate blog post for sure.</p>
+<p>The analyzer is configured via the PUT index settings API. You can test how the data is stored via <code>_analyze</code> API.</p>
+<h2 id="what-is-the-future-for-time-series-indexing">What is the future for time-series indexing?</h2>
+<p>To further simplify time-series data indexing and management, Elastic introduced a concept called <strong>Data streams</strong>. Data streams are a collection of hidden indices created and managed entirely by Elasticsearch.</p>
+<p><img src="/images/post-images/everything-index-elastic/es-data-stream.png" alt="Elasticsearch data streams"></p>
+<p>Essentially, the client does not talk to an index but to a Data stream for everything. Each Data stream should have a matching index template which is made up of component templates (index setttings, mappings, aliases).</p>
+<p>Data streams are integrated into all the concepts explained above in the blog post, such as ILM, index settings, index templates.</p>
+<p>Thanks for reading it through. If you have specific questions, reach me out at <a href="https://twitter.com/aravindputrevu">Twitter</a> or ask your question below :D</p> </div> </article>  </main> <footer class="footer flex"> <section class="container"> <nav class="footer-links"> <a href="/blog">Blogs</a> <a href="/guides">Guides</a> <a href="https://putrevu.substack.com/subscribe" target="_blank" rel="noopener noreferrer">
+Newsletter
+</a> <a href="https://twitter.com/aravindputrevu" target="_blank" rel="noopener noreferrer">
+Twitter
+</a> <a href="/rss.xml">RSS</a> </nav> <nav class="flex justify-center"> <a href="https://astro.build/" title="Built with Astro" target="_blank" rel="noopener noreferrer" class="img"> <img src="/thumbnails/astro.png" class="footer-img" alt="Astro"> </a> <a href="https://github.com/aravindputrevu" title="Open-source on GitHub" target="_blank" rel="noopener noreferrer" class="img"> <img src="/thumbnails/github.png" class="footer-img" alt="GitHub"> </a> <a href="https://github.com/taniarascia/taniarascia.com" title="Original Theme Source" target="_blank" rel="noopener noreferrer" class="img"> <img src="/thumbnails/original-tag.png" class="footer-img" alt="OG Source"> </a> </nav> </section> </footer>  </body> </html> 

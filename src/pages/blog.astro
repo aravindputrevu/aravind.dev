@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const allPosts = await getCollection('posts', ({ data }) => {
+  return !data.hidden;
+});
+
+const sortedPosts = allPosts.sort((a, b) => {
+  return b.data.date.getTime() - a.data.date.getTime();
+});
+---
+
+<BaseLayout title="Blog - Aravind Putrevu" description="Articles about code, product, and tech policy">
+  <div class="container">
+    <header>
+      <h1>Blog</h1>
+      <p class="subtitle">Articles about Code, Product &amp; Tech Policy.</p>
+    </header>
+
+    <div class="posts">
+      {sortedPosts.map((post) => (
+        <a href={`/${post.slug}`} class="post">
+          <h3>{post.data.title}</h3>
+          <time>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+          {post.data.tags && (
+            <div class="tags">
+              {post.data.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          )}
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

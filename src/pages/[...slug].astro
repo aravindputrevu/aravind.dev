@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  const pages = await getCollection('pages');
+  const guides = await getCollection('guides');
+  const presentations = await getCollection('presentations');
+
+  const allContent = [
+    ...posts.map(entry => ({ params: { slug: entry.slug }, props: { entry, type: 'posts' } })),
+    ...pages.map(entry => ({ params: { slug: entry.slug }, props: { entry, type: 'pages' } })),
+    ...guides.map(entry => ({ params: { slug: entry.slug }, props: { entry, type: 'guides' } })),
+    ...presentations.map(entry => ({ params: { slug: entry.slug }, props: { entry, type: 'presentations' } })),
+  ];
+
+  return allContent;
+}
+
+type Props = {
+  entry: CollectionEntry<'posts'> | CollectionEntry<'pages'> | CollectionEntry<'guides'> | CollectionEntry<'presentations'>;
+  type: string;
+};
+
+const { entry, type } = Astro.props;
+const { Content } = await entry.render();
+
+const title = `${entry.data.title} - Aravind Putrevu`;
+const description = entry.data.title;
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="container">
+    <header class="article-header">
+      <h1>{entry.data.title}</h1>
+      {'date' in entry.data && entry.data.date && (
+        <time>{entry.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+      )}
+      {'tags' in entry.data && entry.data.tags && (
+        <div class="tags">
+          {entry.data.tags.map((tag: string) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <div class="post-content">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #eee;
+  }
+
+  .article-header h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .article-header time {
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    background: #f0f0f0;
+    padding: 0.25rem 0.75rem;
+    border-radius: 3px;
+    font-size: 0.85rem;
+  }
+
+  .post-content {
+    line-height: 1.8;
+  }
+</style>

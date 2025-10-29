@@ -1,0 +1,309 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/thumbnails/favicon.png"><meta name="generator" content="Astro v4.16.19"><title>Building a Search experience for a Python Flask Application - Aravind Putrevu</title><meta name="description" content="Building a Search experience for a Python Flask Application"><link rel="sitemap" href="/sitemap-index.xml"><!-- Open Graph / Social Media --><meta property="og:title" content="Building a Search experience for a Python Flask Application - Aravind Putrevu"><meta property="og:description" content="Building a Search experience for a Python Flask Application"><meta property="og:type" content="website"><!-- Twitter Card --><meta name="twitter:card" content="summary"><meta name="twitter:creator" content="@aravindputrevu"><meta name="twitter:title" content="Building a Search experience for a Python Flask Application - Aravind Putrevu"><meta name="twitter:description" content="Building a Search experience for a Python Flask Application"><link rel="stylesheet" href="/_astro/_slug_.D1oAbOhf.css">
+<style>.article-header[data-astro-cid-fzx4jmue]{margin-bottom:2rem;padding-bottom:1rem;border-bottom:2px solid #eee}.article-header[data-astro-cid-fzx4jmue] h1[data-astro-cid-fzx4jmue]{margin-bottom:.5rem}.article-header[data-astro-cid-fzx4jmue] time[data-astro-cid-fzx4jmue]{color:#666;font-size:.9rem}.tags[data-astro-cid-fzx4jmue]{display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap}.tag[data-astro-cid-fzx4jmue]{background:#f0f0f0;padding:.25rem .75rem;border-radius:3px;font-size:.85rem}.post-content[data-astro-cid-fzx4jmue]{line-height:1.8}
+</style><script type="module">const d=localStorage.getItem("theme");d==="dark"&&document.documentElement.classList.add("dark");const e=document.getElementById("dark-mode-button"),o=localStorage.getItem("theme");o==="dark"&&(document.documentElement.classList.add("dark"),e&&(e.textContent="☀️"));e?.addEventListener("click",()=>{if(document.documentElement.classList.contains("dark"))document.documentElement.classList.remove("dark"),localStorage.removeItem("theme"),document.querySelector("#dark-mode")?.remove(),e.textContent="🌙";else{document.documentElement.classList.add("dark"),localStorage.setItem("theme","dark"),e.textContent="☀️";const n=document.getElementsByTagName("head")[0],t=document.createElement("link");t.rel="stylesheet",t.id="dark-mode",t.href="/dark.css",n.appendChild(t)}});
+</script></head> <body> <nav class="navbar"> <div class="container"> <div class="flex"> <div> <a href="/" class="brand"> <span class="emoji"> <img src="/images/code-flat.png" alt="code"> </span> 
+Aravind Putrevu
+</a> </div> <div class="flex"> <a href="/blog">Blogs</a> <a href="/guides">Tech Guides</a> <a href="/about">About</a> <button id="dark-mode-button">🌙</button> </div> </div> </div> </nav>  <main>  <article class="container" data-astro-cid-fzx4jmue> <header class="article-header" data-astro-cid-fzx4jmue> <h1 data-astro-cid-fzx4jmue>Building a Search experience for a Python Flask Application</h1> <time data-astro-cid-fzx4jmue>June 9, 2020</time> <div class="tags" data-astro-cid-fzx4jmue> <span class="tag" data-astro-cid-fzx4jmue>app-search</span><span class="tag" data-astro-cid-fzx4jmue>search engine</span><span class="tag" data-astro-cid-fzx4jmue>python</span><span class="tag" data-astro-cid-fzx4jmue>flask</span><span class="tag" data-astro-cid-fzx4jmue>azure</span><span class="tag" data-astro-cid-fzx4jmue>docker</span> </div> </header> <div class="post-content" data-astro-cid-fzx4jmue> <h2 id="introduction">Introduction</h2>
+<h3 id="what-is-app-search">What is App Search?</h3>
+<p><img src="/images/post-images/elastic-app-search-python/image8.png" alt="App Search"></p>
+<p>App Search contains robust developer APIs and people friendly dashboard controls.It powers search for thousands of popular and delightful applications around the world and it’s backed by <a href="https://github.com/elastic/elasticsearch">Elasticsearch</a>.
+Ready to see it in action? Let’s get going</p>
+<h3 id="what-youll-build">What you’ll build</h3>
+<p>In this codelab, you’re going to build a movies search engine app using Python Flask.
+Your app will:</p>
+<ul>
+<li>Use Elastic App Search, so it works on desktop or mobile.</li>
+<li>Be fast, simple and providing a reliable way to query the information.</li>
+<li>You will also be able to tune the results in a way to suit your need of your user.</li>
+</ul>
+<p><img src="/images/post-images/elastic-app-search-python/image9.png" alt="App Search"></p>
+<blockquote>
+<p>Note: To simplify this guide, and explain the fundamentals, we’re using Elastic App Search via Elastic Cloud Platform.</p>
+</blockquote>
+<h3 id="what-youll-learn">What you’ll learn</h3>
+<ul>
+<li>How to create a Elastic App Search Instance in Cloud.</li>
+<li>Navigating to the Admin Console</li>
+<li>Ingesting Data</li>
+<li>Creating a Search Experience with Python Client</li>
+<li>Deploy it on a Cloud platforms</li>
+<li>What you’ll need</li>
+<li>A recent version of Chrome/Firefox/Edge.</li>
+<li>Visual Studio Code.</li>
+<li>A free Account on Azure. You can create one <a href="https://azure.microsoft.com/en-us/free/">here</a>.</li>
+</ul>
+<p>Elastic Cloud is hosted Elastic Stack (Elasticsearch, Kibana, Beats, Logstash are called as Elastic Stack) as a service. Elastic Cloud offers Search, Observability, Security as a Service.</p>
+<p><img src="/images/post-images/elastic-app-search-python/image18.png" alt="Elastic Cloud"></p>
+<p>In this lab, we’re specifically looking at Elastic Enterprise Search which is the umbrella solution for App Search and Workplace Search.</p>
+<p><img src="/images/post-images/elastic-app-search-python/image30.png" alt="Elastic Enterprise Search"></p>
+<blockquote>
+<p><strong>Note:</strong> You can also download Elastic Enterprise Search from elastic.co/downloads</p>
+</blockquote>
+<h2 id="elastic-cloud">Elastic Cloud</h2>
+<h3 id="creating-an-account-in-elastic-cloud">Creating an account in Elastic Cloud</h3>
+<p>Go to <a href="https://ela.st/dev-dish">https://ela.st/dev-dish</a> and create an account. After logging in, you will see below screen.</p>
+<p><img src="/images/post-images/elastic-app-search-python/image23.png" alt="Elastic Enterprise Search"></p>
+<p>Click on the “Create Deployment”</p>
+<p>Elastic Cloud is available on AWS, GCP, Azure cloud platforms.</p>
+<p>Give a name to your deployment, select the cloud platform and region you want to deploy the solution.Choose Elastic Stack Version (preferably the latest one), finally, select “App Search”.</p>
+<p>There are many ways to edit this deployment but for now, click on “Create Deployment”.</p>
+<blockquote>
+<p><strong>Caution:</strong> Save your App Search Username and Password.These credentials provide owner access to your App Search deployment. The password won’t be shown again. You’ve to reset it from Security settings.</p>
+</blockquote>
+<p>It takes few minutes to deploy the solution on to the selected cloud and region. Click “View your deployment” after the deployment completed. You should be able to this.</p>
+<p><img src="/images/post-images/elastic-app-search-python/image16.png" alt="Deployment page"></p>
+<p>Click on “Launch” link under the Enterprise Search. It takes you to the page to choose App Search console, where we ingest data and create the search experience.</p>
+<h3 id="creating-a-search-engine">Creating a Search Engine</h3>
+<p>You will see below screen after selecting the Elastic App Search. Data is ingested into the  Search engine. You will query the Search engine created here.</p>
+<p><img src="/images/post-images/elastic-app-search-python/image31.png" alt="Onboarding"></p>
+<blockquote>
+<p>Tip: You can create multiple search engines, search multiple engines. It is called Meta Engines.</p>
+</blockquote>
+<h2 id="ingesting--data-into-search-engine">Ingesting  Data into Search Engine</h2>
+<h3 id="about-dataset">About Dataset</h3>
+<p>In order to create a search experience we need data to ingest into App Search. App Search can be used to for wide variety of data. For example you can ingest data like movies, restaurants, recipes, dishes, various products and create a search experience.</p>
+<p>For this lab, we will use the <a href="https://www.dropbox.com/s/f3a210ts0dlrk26/bollywood-movies.json?dl=0">movies dataset</a>.</p>
+<h3 id="ways-to-ingest-data">Ways to Ingest Data</h3>
+<p>There are two ways to ingest data in App Search</p>
+<ol>
+<li>Data upload UI in the App Search Console</li>
+<li>App Search API</li>
+</ol>
+<h4 id="data-upload-ui">Data Upload UI</h4>
+<p>App Search shows a getting started (onboarding) experience when you are accessing App Search for the first time.</p>
+<p><img src="/images/post-images/elastic-app-search-python/image5.png" alt="Onboarding"></p>
+<p>Paste JSON in the text box popup or upload the JSON, but it accepts only data less than 102400 bytes. <a href="https://www.dropbox.com/s/f3a210ts0dlrk26/bollywood-movies.json">Download this dataset</a> and paste some JSON documents.</p>
+<p><img src="/images/post-images/elastic-app-search-python/image21.png" alt="Create Documents"></p>
+<p>After clicking “continue”, you should see below screen.</p>
+<p><img src="/images/post-images/elastic-app-search-python/image19.png" alt="Document Import"></p>
+<h4 id="app-search-api">App Search API</h4>
+<p>Alternatively, you can click on “Use the API” and use a tool like cURL.</p>
+<pre class="astro-code nord" style="background-color:#2e3440ff;color:#d8dee9ff; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#D8DEE9FF">$ curl -X POST 'https:</span><span style="color:#616E88">//&#x3C;app-search-#>.elastic-cloud.com/api/as/v1/engines/movies/documents' \</span></span>
+<span class="line"><span style="color:#D8DEE9FF"> -H 'Content-Type: application/json' \</span></span>
+<span class="line"><span style="color:#D8DEE9FF"> -H 'Authorization: Bearer private-&#x3C;key>' \</span></span>
+<span class="line"><span style="color:#D8DEE9FF"> -d '</span><span style="color:#ECEFF4">[</span></span>
+<span class="line"><span style="color:#ECEFF4">   {</span></span>
+<span class="line"><span style="color:#ECEFF4">  "</span><span style="color:#8FBCBB">title_x</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4"> "</span><span style="color:#A3BE8C">Uri: The Surgical Strike</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">  "</span><span style="color:#8FBCBB">imdb_id</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4"> "</span><span style="color:#A3BE8C">tt8291224</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">  "</span><span style="color:#8FBCBB">poster_path</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4"> "</span><span style="color:#A3BE8C">https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/URI_-_New_poster.jpg/220px-URI_-_New_poster.jpg</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">  "</span><span style="color:#8FBCBB">wiki_link</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4"> "</span><span style="color:#A3BE8C">https://en.wikipedia.org/wiki/Uri:_The_Surgical_Strike</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">  "</span><span style="color:#8FBCBB">title_y</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4"> "</span><span style="color:#A3BE8C">Uri: The Surgical Strike</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">  "</span><span style="color:#8FBCBB">original_title</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4"> "</span><span style="color:#A3BE8C">Uri: The Surgical Strike</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">  "</span><span style="color:#8FBCBB">is_adult</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#B48EAD"> 0</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">  "</span><span style="color:#8FBCBB">year_of_release</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4"> "</span><span style="color:#A3BE8C">2019</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">  "</span><span style="color:#8FBCBB">runtime</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4"> "</span><span style="color:#A3BE8C">138</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">  "</span><span style="color:#8FBCBB">genres</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4"> "</span><span style="color:#A3BE8C">Action|Drama|War</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">  "</span><span style="color:#8FBCBB">imdb_rating</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#B48EAD"> 8.4</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">  "</span><span style="color:#8FBCBB">imdb_votes</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#B48EAD"> 35112</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">  "</span><span style="color:#8FBCBB">story</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4"> "</span><span style="color:#A3BE8C">Divided over five chapters  the film chronicles the events of the surgical strike conducted by the Indian military against suspected militants. It tells the story of the 11 tumultuous events over which the operation was carried out. Indian army special forces carry out a covert operation to avenge the killing of fellow army men at their base by a terrorist group.</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">  "</span><span style="color:#8FBCBB">summary</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4"> "</span><span style="color:#A3BE8C">Indian army special forces execute a covert operation  avenging the killing of fellow army men at their base by a terrorist group.</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">  "</span><span style="color:#8FBCBB">tagline</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4"> ""</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">  "</span><span style="color:#8FBCBB">actors</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4"> "</span><span style="color:#A3BE8C">Vicky Kaushal|Paresh Rawal|Mohit Raina|Yami Gautam|Kirti Kulhari|Rajit Kapoor|Ivan Rodrigues|Manasi Parekh|Swaroop Sampat|Riva Arora|Yogesh Soman|Fareed Ahmed|Akashdeep Arora|Kallol Banerjee|</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">"</span><span style="color:#8FBCBB">wins_nominations</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4"> "</span><span style="color:#A3BE8C">4 wins</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">,</span></span>
+<span class="line"><span style="color:#ECEFF4">  "</span><span style="color:#8FBCBB">release_date</span><span style="color:#ECEFF4">"</span><span style="color:#ECEFF4">:</span><span style="color:#ECEFF4"> "</span><span style="color:#A3BE8C">11 January 2019 (USA)</span><span style="color:#ECEFF4">"</span></span>
+<span class="line"><span style="color:#ECEFF4">  }</span><span style="color:#D8DEE9FF">    </span></span>
+<span class="line"><span style="color:#ECEFF4">]</span><span style="color:#D8DEE9FF">'</span></span>
+<span class="line"></span></code></pre>
+<h2 id="securing-app-search">Securing App Search</h2>
+<p>App Search comes with inbuilt authentication mechanism.</p>
+<p><img src="/images/post-images/elastic-app-search-python/image1.png" alt="Authentication"></p>
+<blockquote>
+<p>Tip: A Public Search Key and a Private API Key are generated when you create a new account.          By default, they can access all Engines. If you do not want to use the default keys, feel free to delete them.</p>
+</blockquote>
+<h3 id="api-keys">API Keys</h3>
+<p>API Keys come in four different types:</p>
+<ul>
+<li><strong>Public Search Key:</strong> The default API reading key has read-only ‘search’ access to the Search endpoint. You can reveal this key to the public. Prefixed with <code>search-</code>.<br><br></li>
+<li><strong>Private API Key:</strong> The default API access key can read and write against all available API endpoints except for Credentials. You should keep this key secret. Prefixed with <code>private-</code>.<br><br></li>
+<li><strong>Private Admin Key:</strong> A special account management key that is used to request against the Credentials endpoint. You should keep this key very secret. Prefixed with <code>admin-</code>.<br><br></li>
+<li><strong>Signed Search Key:</strong> A more restrictive public key to query the Search endpoint resources. It is a JSON Web Token signed using a read only Private API Key by the HMAC-SHA256 algorithm. Signed search keys are created using one of our clients. They require an existing Private API key with read access.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Key Type</th><th>API Access</th><th>Write</th><th>Read Documents</th><th>Engine Access</th></tr></thead><tbody><tr><td>Public Search</td><td>Search API</td><td>No</td><td>Yes</td><td>Yes</td></tr><tr><td>Private API</td><td>All, except Credential API</td><td>Yes</td><td>Yes</td><td>Yes</td></tr><tr><td>Private Admin</td><td>Credential API<br>only</td><td>Credential API<br>only</td><td>Credential API only</td><td>Not Applicable</td></tr></tbody></table>
+<h2 id="exploring-app-search-console">Exploring App Search Console</h2>
+<p>App Search comes with a host of Speciality Search features. We’ll take a look at some of them here. Otherwise, feel free to explore the menu.</p>
+<p><img src="/images/post-images/elastic-app-search-python/image29.png" alt="App Search Console"></p>
+<p><strong>Overview</strong> lets you take a look at # of documents, click rate, API events.</p>
+<p><strong>Analytics</strong> displays various metrics of the Search Engine, like what users were searching, top queries with clicks  and queries with no results shown etc.</p>
+<p><strong>Query Tester</strong> is an easy way to test your queries and check the relevancy score. Place where you can tune your results for the users.</p>
+<p><strong>Reference UI</strong> will help you get your next search experience rolling as quickly as possible.
+You can see a live preview of your Engine and configuration state, or use the <a href="https://github.com/elastic/app-search-reference-ui-react">open source code</a> to get started. It is a react based generic UI that gets generated with the configuration you have set in the console.</p>
+<blockquote>
+<p>Note: <a href="https://github.com/elastic/app-search-reference-ui-react">Open source reference UI</a> react based bare bones app to build any search application. We also have a <a href="https://github.com/elastic/search-ui/blob/master/ADVANCED.md#headless-core">headless core</a> that you could use it for building  any Javascript applications.</p>
+</blockquote>
+<p><img src="/images/post-images/elastic-app-search-python/image24.png" alt="App Search Console"></p>
+<p><strong>Schema</strong> helps you to define and update the document’s field data structure.  You can  simply choose what the document type to be even after indexing the data.</p>
+<p><strong>Documents</strong> lets you browse and view various fields. If you want index some more data, you can leverage the index documents button to either paste or upload the JSON data.</p>
+<p><strong>API Logs</strong> shows you the API’s called by the client in app search, you can notice the browser used, error code etc.</p>
+<h2 id="creating-a-search-experience">Creating a Search Experience</h2>
+<p>We’re gonna use  Flask as our framework for building a Python web application. Please clone the git repository using the commands below.</p>
+<pre class="astro-code nord" style="background-color:#2e3440ff;color:#d8dee9ff; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#88C0D0">$</span><span style="color:#A3BE8C"> git</span><span style="color:#A3BE8C"> clone</span><span style="color:#A3BE8C"> https://github.com/aravindputrevu/app-search-flask-app</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#88C0D0">$</span><span style="color:#A3BE8C"> cd</span><span style="color:#A3BE8C"> app-search-flask-app</span></span>
+<span class="line"></span></code></pre>
+<h3 id="building-basic-flask-app">Building Basic Flask App</h3>
+<p>Let us switch to a different where you can find a barebones Flask Web App.</p>
+<blockquote>
+<p>Caution: Make sure you have Python installed. Preferably 3.x.</p>
+</blockquote>
+<pre class="astro-code nord" style="background-color:#2e3440ff;color:#d8dee9ff; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#88C0D0">$</span><span style="color:#A3BE8C"> git</span><span style="color:#A3BE8C"> checkout</span><span style="color:#A3BE8C"> basic-flask-app</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#88C0D0">$</span><span style="color:#A3BE8C"> python</span><span style="color:#A3BE8C"> main.py</span></span>
+<span class="line"></span></code></pre>
+<p>Go to <a href="http://localhost:5000">http://localhost:5000</a></p>
+<p><img src="/images/post-images/elastic-app-search-python/image20.png" alt="Python Flask App"></p>
+<p><code>main.py</code> contains the code for the application.</p>
+<h3 id="integrating-app-search">Integrating App Search</h3>
+<p>Quickly move over to add-app-search branch where integrate Web App with Elastic App Search.</p>
+<pre class="astro-code nord" style="background-color:#2e3440ff;color:#d8dee9ff; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#88C0D0">$</span><span style="color:#A3BE8C"> git</span><span style="color:#A3BE8C"> checkout</span><span style="color:#A3BE8C"> add-app-search</span></span>
+<span class="line"></span></code></pre>
+<p>Open <code>config.json</code> file in your file editor(preferably vscode) and fill out the <code>base_endpoint</code>, <code>api_key</code>, <code>engine_name</code>  from Elastic App Search Console.</p>
+<blockquote>
+<p>Note: You should remove <code>https://</code> and suffix <code>base_endpoint</code> with <code>/api/as/v1</code> to the URL</p>
+</blockquote>
+<p><img src="/images/post-images/elastic-app-search-python/image22.png" alt="Credentials"></p>
+<p>In the <code>main.py</code>, we have imported the app search python client and instantiated the client with the credentials configured.</p>
+<pre class="astro-code nord" style="background-color:#2e3440ff;color:#d8dee9ff; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#81A1C1">from</span><span style="color:#D8DEE9FF"> elastic_app_search </span><span style="color:#81A1C1">import</span><span style="color:#D8DEE9FF"> Client</span></span>
+<span class="line"><span style="color:#D8DEE9FF"> </span></span>
+<span class="line"><span style="color:#D8DEE9FF">client </span><span style="color:#81A1C1">=</span><span style="color:#88C0D0"> Client</span><span style="color:#ECEFF4">(</span></span>
+<span class="line"><span style="color:#D8DEE9">   base_endpoint</span><span style="color:#81A1C1">=</span><span style="color:#D8DEE9FF">config</span><span style="color:#ECEFF4">[</span><span style="color:#ECEFF4">'</span><span style="color:#A3BE8C">appsearch</span><span style="color:#ECEFF4">'</span><span style="color:#ECEFF4">][</span><span style="color:#ECEFF4">'</span><span style="color:#A3BE8C">base_endpoint</span><span style="color:#ECEFF4">'</span><span style="color:#ECEFF4">],</span></span>
+<span class="line"><span style="color:#D8DEE9">   api_key</span><span style="color:#81A1C1">=</span><span style="color:#D8DEE9FF">config</span><span style="color:#ECEFF4">[</span><span style="color:#ECEFF4">'</span><span style="color:#A3BE8C">appsearch</span><span style="color:#ECEFF4">'</span><span style="color:#ECEFF4">][</span><span style="color:#ECEFF4">'</span><span style="color:#A3BE8C">api_key</span><span style="color:#ECEFF4">'</span><span style="color:#ECEFF4">],</span></span>
+<span class="line"><span style="color:#D8DEE9">   use_https</span><span style="color:#81A1C1">=True</span><span style="color:#ECEFF4">)</span></span>
+<span class="line"></span></code></pre>
+<p>We’ve also created two HTTP endpoints  <code>/search</code>,  <code>/index</code>. While the search endpoint helps you to interact with the Search engine, Index helps you to do one time data indexing to the search engine using <code>data.json</code> file.</p>
+<p>Run the application using below command</p>
+<pre class="astro-code nord" style="background-color:#2e3440ff;color:#d8dee9ff; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#88C0D0">$</span><span style="color:#A3BE8C"> python</span><span style="color:#A3BE8C"> main.py</span></span>
+<span class="line"></span></code></pre>
+<p>Go to <a href="http://localhost:5000">http://localhost:5000</a> and index the data using <a href="http://localhost:5000/index">http://localhost:5000/index</a> which will index the sample data into search engine.</p>
+<p>You should be able to see the movie data.</p>
+<p>Now try searching with different terms like <code>drama</code>, <code>action</code> and see the results.</p>
+<h3 id="tweaking-the-search">Tweaking the Search</h3>
+<p>Interesting thing with App Search is you can configure your search engine real time without any code change or restarting your application.</p>
+<p>Features like Relevance Tuning, Synonyms &#x26; Curations help curate Search experience for the user simply.</p>
+<p>Let us try and change some settings.</p>
+<h4 id="relevance-tuning">Relevance Tuning</h4>
+<p>The true goal of a search engine is to connect you with useful information as quickly as possible. Relevance Tuning helps you to show accurate results to the users.</p>
+<p>With a dataset like movies, users generally search for the movie title along with the year or actor. We could use the relevancy tuning to set the right weights and boosts so that accurate  results are shown.</p>
+<p><img src="/images/post-images/elastic-app-search-python/image26.png" alt="Relevance Tuning"></p>
+<blockquote>
+<p>Note: Make sure you test the queries in the query tester for optimal results after changing relevancy.</p>
+</blockquote>
+<h4 id="synonyms">Synonyms</h4>
+<p>Synonyms relate queries together that contextually have the same meaning in your dataset.Sometimes users will use different terminology than your context might expect.
+This can lead them to poor search relevance: you are selling movies, but they want films!</p>
+<p><img src="/images/post-images/elastic-app-search-python/image26.png" alt="Add a Synonym Set"></p>
+<h4 id="curations">Curations</h4>
+<p>You are the curator of your Engine. You are in control of how documents are consumed by your visitors.
+A curation helps people discover what you would most like them to discover. Or, what you would not like them to discover.
+Use a keyword like “drama” to find the results and promote or hide the documents  appearing in the results. Curations can promote specific documents to have them appear in a prominent way.</p>
+<p><img src="/images/post-images/elastic-app-search-python/image33.png" alt="Promoted Documents"></p>
+<h2 id="deploying-application-to-cloud">Deploying Application to Cloud</h2>
+<h3 id="containerize-the-application">Containerize the Application</h3>
+<p>Containerizing the application helps us to deploy on any platform or cloud container service like AKS, GKE or even managed services like Google App Engine, Azure App Service.</p>
+<p>Let us switch over to the <code>docker</code> branch.</p>
+<pre class="astro-code nord" style="background-color:#2e3440ff;color:#d8dee9ff; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#88C0D0">$</span><span style="color:#A3BE8C"> git</span><span style="color:#A3BE8C"> checkout</span><span style="color:#A3BE8C"> docker</span></span>
+<span class="line"></span></code></pre>
+<p>You should see <code>Dockerfile</code> and <code>docker-compose.yml</code> which helps build a container for the application. [Visual Studio Code Docker Extension] (<a href="https://code.visualstudio.com/docs/containers/overview">https://code.visualstudio.com/docs/containers/overview</a>) can help you to build Dockerfile for the application.</p>
+<p><img src="/images/post-images/elastic-app-search-python/image32.png" alt="dockerfile"></p>
+<p>Try running the application from Visual Studio Code using the Run option as shown in the picture below.</p>
+<blockquote>
+<p>Note: You could also generate the Dockerfile with the config according to your choice by using command palette  cmd+shift+p (mac) or ctrl+shift+p (windows) &#x26; typing “Docker: Add Docker Files to Workspace”</p>
+</blockquote>
+<p><img src="/images/post-images/elastic-app-search-python/image7.png" alt="Run Docker"></p>
+<p>As you run the application, it opens up in the browser on a random port. Play with the application and see if  you are getting similar results as before.</p>
+<h3 id="pushing-container-to-cloud">Pushing Container to Cloud</h3>
+<p>The main benefit of containers is their ability to build once, run anywhere. Best practice to store a container in a container registry like Docker Hub. We also have container registries from Cloud platforms (Azure Container Registry, Google Container Registry).</p>
+<p>In this lab, we would push the container to the Azure container registry directly using the Docker Extension in Visual Studio Code editor.  All that you need to have is Docker VS Code Extension installed and configure Azure Container Registry(ACR).</p>
+<p>A container registry is nothing but a store for all your containers for various application builds.  You can also consider it like a docker hub equivalent except for the fact, it is yours with a specific name like <code>aravind.acr.io</code></p>
+<p>Just use the “plug” icon on the registries to connect the Azure Container registry(image for reference)</p>
+<p><img src="/images/post-images/elastic-app-search-python/image4.png" alt="Run Docker"></p>
+<p>Invoke the command palette using <code>CMD+Shift+P</code> and build-push the container to ACR using “Azure Container Registry: Build Image in Azure…”</p>
+<p><img src="/images/post-images/elastic-app-search-python/image25.png" alt="Run Docker"></p>
+<p>Tags you container with a specific name, leave as it is if you are ok with the default name.</p>
+<p><img src="/images/post-images/elastic-app-search-python/image12.png" alt="Run Docker"></p>
+<p>You will need to create a container registry with a unique identifier (ex: your last name) if one doesn’t populate automatically. Click on <code>+Create new  registry...</code> , select a SKU (Basic), Resource Group name, location (Southeast Asia).</p>
+<p><img src="/images/post-images/elastic-app-search-python/image34.png" alt="Run Docker"></p>
+<p>Choose your choice of container image(Linux).</p>
+<p><img src="/images/post-images/elastic-app-search-python/image11.png" alt="Run Docker"></p>
+<p>Once the build completes you should be able to see a container in registry. You can check in <a href="https://portal.azure.com">Azure Portal</a> or VS Code Docker Extension pane (Images below for reference).</p>
+<p><img src="/images/post-images/elastic-app-search-python/image6.png" alt="Run Docker"></p>
+<p><img src="/images/post-images/elastic-app-search-python/image27.png" alt="Run Docker"></p>
+<blockquote>
+<p>Note: Azure Services used in this guide are in free tier.</p>
+</blockquote>
+<h3 id="deploying-app-to-azure-app-service">Deploying App to Azure App Service</h3>
+<p>Azure App Service is a fully managed platform for building, deploying and scaling web apps and you can run it in free tier.</p>
+<p>Install the Visual Studio Code <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice">Azure App Service</a> extension to be able to easily deploy the container in the Azure App Service.</p>
+<p>Installing this extension adds a App Service deployment option in Docker Extension in VS Code. Quickly move to the Docker pane in VS Code, locate the container we built in Azure registry and right click on it. You should be able to see “Deploy Image  to Azure App Service…” option (image for reference).</p>
+<p><img src="/images/post-images/elastic-app-search-python/image35.png" alt="Run Docker"></p>
+<p>Click on the “Deploy Image to Azure App Service…” and follow the 6-step wizard to create the webapp.</p>
+<p><img src="/images/post-images/elastic-app-search-python/image17.png" alt="Run Docker"></p>
+<p>Make sure you enter a unique name for the web application, this will be the go to URL for the users.</p>
+<p><img src="/images/post-images/elastic-app-search-python/image10.png" alt="Run Docker"></p>
+<p>Step 2, you should create a App Service plan to deploy the web application. It is quite simple. Follow the images for reference, I’ve chosen F1 Free as pricing tier and Southeast Asia as my location to deploy the application (Images for reference).</p>
+<p><img src="/images/post-images/elastic-app-search-python/image3.png" alt="Run Docker"></p>
+<p><img src="/images/post-images/elastic-app-search-python/image36.png" alt="Run Docker"></p>
+<p><img src="/images/post-images/elastic-app-search-python/image4.png" alt="Run Docker"></p>
+<p>Finally the application is live. You can confirm the same either via popup shown in VS Code. If not in the terminal (Images for reference).</p>
+<p><img src="/images/post-images/elastic-app-search-python/image13.png" alt="Run Docker"></p>
+<p><img src="/images/post-images/elastic-app-search-python/image2.png" alt="Run Docker"></p>
+<blockquote>
+<p>Note: Alternatively, you can also deploy the container in services like AKS, GKE, Azure Container Instances, Cloud Run etc.</p>
+</blockquote>
+<h2 id="congratulations">Congratulations</h2>
+<p>Congratulations, you’ve successfully built a Python Web Application with Search functionality and deployed it in the cloud!</p>
+<p>In this lab, you have successfully learnt</p>
+<ul>
+<li>Creating and Deploying a Search Engine</li>
+<li>Tuning Search Results with Synonyms, Curations.</li>
+<li>Containerize a Python Web Application.</li>
+<li>Deploy the containerized web application to Cloud Service.</li>
+</ul>
+<h3 id="reference-docs">Reference docs</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=gVtQ42Fp_v8">Youtube video of this guide</a></li>
+<li><a href="https://github.com/aravindputrevu/app-search-flask-app">Git Repository</a></li>
+<li><a href="https://www.elastic.co/guide/en/app-search/current/index.html">Elastic App Search Documentation</a></li>
+</ul>
+<h3 id="further-reading">Further Reading</h3>
+<p>Check out some of these blogs…</p>
+<ul>
+<li><a href="https://www.elastic.co/blog/how-to-build-application-search-with-react-and-elastic-app-search">Build a react based Search App</a></li>
+<li><a href="https://www.elastic.co/blog/what-your-elastic-app-search-analytics-are-telling-you">About App Search Analytics</a></li>
+</ul> </div> </article>  </main> <footer class="footer flex"> <section class="container"> <nav class="footer-links"> <a href="/blog">Blogs</a> <a href="/guides">Guides</a> <a href="https://putrevu.substack.com/subscribe" target="_blank" rel="noopener noreferrer">
+Newsletter
+</a> <a href="https://twitter.com/aravindputrevu" target="_blank" rel="noopener noreferrer">
+Twitter
+</a> <a href="/rss.xml">RSS</a> </nav> <nav class="flex justify-center"> <a href="https://astro.build/" title="Built with Astro" target="_blank" rel="noopener noreferrer" class="img"> <img src="/thumbnails/astro.png" class="footer-img" alt="Astro"> </a> <a href="https://github.com/aravindputrevu" title="Open-source on GitHub" target="_blank" rel="noopener noreferrer" class="img"> <img src="/thumbnails/github.png" class="footer-img" alt="GitHub"> </a> <a href="https://github.com/taniarascia/taniarascia.com" title="Original Theme Source" target="_blank" rel="noopener noreferrer" class="img"> <img src="/thumbnails/original-tag.png" class="footer-img" alt="OG Source"> </a> </nav> </section> </footer>  </body> </html> 

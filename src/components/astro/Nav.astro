@@ -1,0 +1,57 @@
+---
+// Navigation component
+---
+
+<nav class="navbar">
+  <div class="container">
+    <div class="flex">
+      <div>
+        <a href="/" class="brand">
+          <span class="emoji">
+            <img src="/images/code-flat.png" alt="code" />
+          </span>{' '}
+          Aravind Putrevu
+        </a>
+      </div>
+      <div class="flex">
+        <a href="/blog">Blogs</a>
+        <a href="/guides">Tech Guides</a>
+        <a href="/about">About</a>
+        <button id="dark-mode-button">🌙</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const darkModeButton = document.getElementById('dark-mode-button');
+
+  // Set initial state
+  const theme = localStorage.getItem('theme');
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    if (darkModeButton) darkModeButton.textContent = '☀️';
+  }
+
+  darkModeButton?.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains('dark');
+
+    if (isDark) {
+      document.documentElement.classList.remove('dark');
+      localStorage.removeItem('theme');
+      const link = document.querySelector('#dark-mode');
+      link?.remove();
+      darkModeButton.textContent = '🌙';
+    } else {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+      darkModeButton.textContent = '☀️';
+      const head = document.getElementsByTagName('head')[0];
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.id = 'dark-mode';
+      link.href = '/dark.css';
+      head.appendChild(link);
+    }
+  });
+</script>

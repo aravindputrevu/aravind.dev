@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const allPresentations = await getCollection('presentations');
+
+const sortedPresentations = allPresentations.sort((a, b) => {
+  return (b.data.date?.getTime() || 0) - (a.data.date?.getTime() || 0);
+});
+---
+
+<BaseLayout title="Presentations - Aravind Putrevu" description="Conference talks and presentations">
+  <div class="container">
+    <header>
+      <h1>Presentations</h1>
+      <p class="subtitle">Conference talks and presentations.</p>
+    </header>
+
+    <div class="posts">
+      {sortedPresentations.map((pres) => (
+        <a href={`/${pres.slug}`} class="post">
+          <h3>{pres.data.title}</h3>
+          {pres.data.date && <time>{pres.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>}
+          {pres.data.tags && (
+            <div class="tags">
+              {pres.data.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          )}
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

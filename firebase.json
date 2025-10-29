@@ -1,17 +1,13 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "dist",
     "target": "aravind-dev",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
+    "cleanUrls": true,
+    "trailingSlash": false
   }
 }

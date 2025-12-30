@@ -11,7 +11,7 @@ Nice to see you here! I'm Aravind.
 
 I believe technology can help change human lives in a positive way! I’m passionate in helping developers succeed in their quest for building new things.
 
-![Me/images/aravind-2020.jpg)
+![Aravind](/images/aravind-2020.jpg)
 
 ### 2024
 

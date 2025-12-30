@@ -14,12 +14,6 @@ const sortedPosts = allPosts.sort((a, b) => {
 
 const latestPosts = sortedPosts.filter(post => post.data.tags?.includes('tech')).slice(0, 5);
 
-// Get presentations
-const allPresentations = await getCollection('presentations');
-const latestPresentations = allPresentations.sort((a, b) => {
-  return (b.data.date?.getTime() || 0) - (a.data.date?.getTime() || 0);
-}).slice(0, 5);
-
 // Import projects data
 const projects = [
   {
@@ -79,21 +73,6 @@ const projects = [
           <a href={`/${post.slug}`} class="post">
             <h3>{post.data.title}</h3>
             <time>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-          </a>
-        ))}
-      </div>
-    </section>
-
-    <section>
-      <h2>
-        Presentations
-        <a class="section-button" href="/presentations">View all</a>
-      </h2>
-      <div class="posts">
-        {latestPresentations.map((pres) => (
-          <a href={`/${pres.slug}`} class="post">
-            <h3>{pres.data.title}</h3>
-            {pres.data.date && <time>{pres.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>}
           </a>
         ))}
       </div>

@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const timeline = [
+  {
+    year: 'Now',
+    title: 'Growing Dev Tools',
+    description: 'Scaling CodeRabbit, an AI code review tool from early traction to market leadership. Wearing many hats across growth, engineering, developer relations, and brand.'
+  },
+  {
+    year: '2023-2024',
+    title: 'Developer GTM',
+    description: 'Advising founders on developer go-to-market strategy. Helping dev tool companies find product-market fit, build developer communities, and scale from 0 to 1.'
+  },
+  {
+    year: '2017–2023',
+    title: 'Developer Advocacy & Experience',
+    description: 'Spent 5+ years at Elastic as Developer Advocate. Spoke at 350+ events across conferences, meetups, and workshops. Built developer communities and user groups across India and Southeast Asia. Helped teams adopt Elasticsearch, observability, and search.'
+  },
+  {
+    year: 'Earlier',
+    title: 'Engineering',
+    description: 'Built financial systems for real-time fraud detection. Worked on anti-virus and security software for enterprise datacenters. Wrote code in Java, .NET, and SQL.'
+  }
+];
+---
+
+<BaseLayout title="About - Aravind Putrevu" description="About Aravind Putrevu">
+  <div class="about">
+    <section class="intro">
+      <p>
+        I believe technology can help change human lives in a positive way.
+        I'm passionate about helping developers succeed in their quest for building new things.
+      </p>
+      <p class="location">
+        Oscillating between Bangalore, San Francisco Bay Area, and Amsterdam.
+      </p>
+    </section>
+
+    <section class="timeline">
+      {timeline.map((item, index) => (
+        <div class="timeline-item">
+          <span class="year">{item.year}</span>
+          <div class="content">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </div>
+        </div>
+      ))}
+    </section>
+
+    <section class="connect">
+      <h2>Connect</h2>
+      <p class="links">
+        <a href="https://twitter.com/aravindputrevu">Twitter</a>
+        <a href="https://linkedin.com/in/aravindputrevu">LinkedIn</a>
+        <a href="https://github.com/aravindputrevu">GitHub</a>
+        <a href="mailto:aravind@hey.com">Email</a>
+      </p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .about {
+    max-width: 600px;
+    padding: 2rem 1.5rem 0;
+    margin: 0 auto;
+  }
+
+  .intro {
+    margin-bottom: 2.5rem;
+  }
+
+  .intro p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: 0.5rem;
+  }
+
+  .intro .location {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .timeline {
+    margin-bottom: 2.5rem;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .timeline-item:last-child {
+    border-bottom: none;
+  }
+
+  .timeline-item .year {
+    min-width: 80px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding-top: 0.15rem;
+  }
+
+  .timeline-item .content {
+    flex: 1;
+  }
+
+  .timeline-item h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem 0;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-item p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .connect h2 {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .connect .links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .connect .links a {
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--text-muted);
+  }
+
+  .connect .links a:hover {
+    color: var(--heading-color);
+  }
+
+  @media screen and (min-width: 800px) {
+    .about {
+      padding-top: 3rem;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    .timeline-item {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .timeline-item .year {
+      min-width: auto;
+    }
+  }
+</style>

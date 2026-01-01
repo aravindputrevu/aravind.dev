@@ -2,102 +2,114 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Get latest posts
 const allPosts = await getCollection('posts', ({ data }) => {
   return !data.hidden;
 });
 
-// Sort posts by date
 const sortedPosts = allPosts.sort((a, b) => {
   return b.data.date.getTime() - a.data.date.getTime();
 });
 
-const latestPosts = sortedPosts.filter(post => post.data.tags?.includes('tech')).slice(0, 5);
-
-// Import projects data
-const projects = [
-  {
-    icon: '👩🏽‍💻',
-    title: 'Elastic Cloud Public API Java SDK',
-    path: 'https://github.com/aravindputrevu/ess-cloud-sdk-java',
-    source: 'https://github.com/aravindputrevu/ess-cloud-sdk-java',
-    description: 'Java SDK for Elastic Cloud Public API',
-  },
-  {
-    icon: '👩🏽‍💻',
-    title: 'Flask App with Search',
-    path: 'https://github.com/aravindputrevu/app-search-flask-app',
-    source: 'https://github.com/aravindputrevu/app-search-flask-app',
-    description: 'A Python Flask Application with Search',
-  },
-  {
-    icon: '👩🏽‍💻',
-    title: 'Javalin CRUD App',
-    path: 'https://github.com/aravindputrevu/javalin-student',
-    source: 'https://github.com/aravindputrevu/javalin-student',
-    description: 'Tracing a Simple CRUD Java Service with Elastic Java APM',
-  },
-];
 ---
 
 <BaseLayout>
-  <section class="lead">
-    <div class="container">
-      <div>
-        <h1>
-          Hello! I'm Aravind Putrevu.
-        </h1>
-        <p>
-          Helping developers solve their problems!
-        </p>
-        <p>
-          I write to express. You can find blog posts about Code, Product &amp; Tech Policy.<br/>
-          You can read my <a href="/blog">articles</a>, try <a href="/guides">guides &amp; codelabs</a>, or know more <a href="/about">about me</a>.
-        </p>
-        <a href="https://twitter.com/aravindputrevu?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="medium" data-text="Follow me" data-show-count="true">Follow @aravindputrevu</a>
-      </div>
-      <div class="image">
-        <img src="/images/aravind-2020.jpg" alt="Aravind" />
-      </div>
-    </div>
-  </section>
+  <div class="home">
+    <p class="intro">
+      I spent 5 years at Elastic building developer communities and helping teams adopt observability and search. Now I focus on developer experience, growth, and open source.
+    </p>
 
-  <div class="container index">
-    <section>
-      <h2>
-        Latest Blog Posts
-        <a class="section-button" href="/blog">View all</a>
-      </h2>
-      <div class="posts">
-        {latestPosts.map((post) => (
-          <a href={`/${post.slug}`} class="post">
-            <h3>{post.data.title}</h3>
-            <time>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-          </a>
+    <p class="links">
+      <a href="https://twitter.com/aravindputrevu">Twitter</a> ·
+      <a href="https://github.com/aravindputrevu">GitHub</a> ·
+      <a href="/about">About</a>
+    </p>
+
+    <section class="writing">
+      <h2>Writing</h2>
+
+      <ul class="posts">
+        {sortedPosts.map((post) => (
+          <li>
+            <a href={`/${post.slug}`}>{post.data.title}</a>
+            <span class="year">{post.data.date.getFullYear()}</span>
+          </li>
         ))}
-      </div>
-    </section>
-
-    <section>
-      <h2>Code Samples</h2>
-      <div class="projects">
-        {projects.map((project) => (
-          <a href={project.path} class="project" target="_blank" rel="noopener noreferrer">
-            <div class="project-icon">{project.icon}</div>
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-          </a>
-        ))}
-      </div>
-    </section>
-
-    <section>
-      <div class="newsletter-container">
-        Join 1000+ developers to hear stories from Open source, developer conferences, and technology.
-        <iframe class="newsletter-container-size" src="https://devshorts.substack.com/embed" frameborder="0"></iframe>
-      </div>
+      </ul>
     </section>
   </div>
-
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </BaseLayout>
+
+<style>
+  .home {
+    max-width: 600px;
+    padding: 2rem 1.5rem 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .intro {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: 0.5rem;
+  }
+
+  .links {
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+  }
+
+  .links a {
+    text-decoration: none;
+    color: var(--text-muted);
+  }
+
+  .links a:hover {
+    color: var(--heading-color);
+  }
+
+  .writing h2 {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .posts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .posts li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.3rem 0;
+    gap: 1rem;
+  }
+
+  .posts a {
+    text-decoration: none;
+    flex: 1;
+    font-size: 0.95rem;
+  }
+
+  .posts a:hover {
+    text-decoration: underline;
+  }
+
+  .year {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  @media screen and (min-width: 800px) {
+    .home {
+      padding-top: 3rem;
+    }
+  }
+</style>

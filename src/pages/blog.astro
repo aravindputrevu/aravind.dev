@@ -9,29 +9,118 @@ const allPosts = await getCollection('posts', ({ data }) => {
 const sortedPosts = allPosts.sort((a, b) => {
   return b.data.date.getTime() - a.data.date.getTime();
 });
+
+// Group posts by year
+const postsByYear = sortedPosts.reduce((acc, post) => {
+  const year = post.data.date.getFullYear();
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(post);
+  return acc;
+}, {} as Record<number, typeof sortedPosts>);
+
+const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 ---
 
-<BaseLayout title="Blog - Aravind Putrevu" description="Articles about code, product, and tech policy">
-  <div class="container">
-    <header>
-      <h1>Blog</h1>
-      <p class="subtitle">Articles about Code, Product &amp; Tech Policy.</p>
+<BaseLayout title="Writing - Aravind Putrevu" description="Articles about code, product, and tech policy">
+  <div class="container brutalist-page">
+    <header class="page-header">
+      <h1>WRITING</h1>
+      <div class="separator"></div>
+      <p class="description">Articles about Code, Product &amp; Tech Policy.</p>
     </header>
 
-    <div class="posts">
-      {sortedPosts.map((post) => (
-        <a href={`/${post.slug}`} class="post">
-          <h3>{post.data.title}</h3>
-          <time>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-          {post.data.tags && (
-            <div class="tags">
-              {post.data.tags.map((tag) => (
-                <span class="tag">{tag}</span>
-              ))}
-            </div>
-          )}
-        </a>
-      ))}
-    </div>
+    {years.map((year) => (
+      <section class="year-section">
+        <h2 class="year-heading">{year}</h2>
+        <ul class="post-list">
+          {postsByYear[Number(year)].map((post) => (
+            <li>
+              <span class="post-date">
+                {post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+              </span>
+              <a href={`/${post.slug}`}>{post.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
   </div>
 </BaseLayout>
+
+<style>
+  .brutalist-page {
+    max-width: 680px;
+    padding-top: 2rem;
+  }
+
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .separator {
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+  }
+
+  .description {
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .year-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .year-heading {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    padding-bottom: 0;
+    border-bottom: none;
+    color: var(--text-muted);
+  }
+
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .post-list li {
+    display: flex;
+    align-items: baseline;
+    padding: 0.4rem 0;
+    gap: 1.5rem;
+  }
+
+  .post-date {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-family: var(--code-font-family);
+    min-width: 4.5rem;
+  }
+
+  .post-list a {
+    font-weight: 400;
+  }
+
+  @media screen and (min-width: 800px) {
+    .brutalist-page {
+      padding-top: 4rem;
+    }
+
+    .page-header h1 {
+      font-size: 1.8rem;
+    }
+  }
+</style>

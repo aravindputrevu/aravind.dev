@@ -5,12 +5,12 @@
   --background: #111111;
   --font-color: #EEEEEE;
   --heading-color: #FFFFFF;
-  --text-muted: #888888;
+  --text-muted: #999999;
 
   /* Legacy mappings for compatibility */
   --dark-font-color: #EEEEEE;
   --medium-font-color: #CCCCCC;
-  --light-font-color: #888888;
+  --light-font-color: #999999;
   --light-background: #1A1A1A;
   --lighter-background: #222222;
   --border: #333333;

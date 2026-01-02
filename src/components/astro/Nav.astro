@@ -23,10 +23,23 @@
 <script>
   const darkModeButton = document.getElementById('dark-mode-button');
 
-  // Set initial state
+  // Load dark mode CSS helper
+  function loadDarkCSS() {
+    if (!document.querySelector('#dark-mode')) {
+      const head = document.getElementsByTagName('head')[0];
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.id = 'dark-mode';
+      link.href = '/dark.css';
+      head.appendChild(link);
+    }
+  }
+
+  // Set initial state on page load
   const theme = localStorage.getItem('theme');
   if (theme === 'dark') {
     document.documentElement.classList.add('dark');
+    loadDarkCSS();
     if (darkModeButton) darkModeButton.textContent = '○';
   }
 
@@ -34,21 +47,18 @@
     const isDark = document.documentElement.classList.contains('dark');
 
     if (isDark) {
+      // Switch to light mode
       document.documentElement.classList.remove('dark');
       localStorage.removeItem('theme');
       const link = document.querySelector('#dark-mode');
       link?.remove();
       darkModeButton.textContent = '●';
     } else {
+      // Switch to dark mode
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
+      loadDarkCSS();
       darkModeButton.textContent = '○';
-      const head = document.getElementsByTagName('head')[0];
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.id = 'dark-mode';
-      link.href = '/dark.css';
-      head.appendChild(link);
     }
   });
 </script>

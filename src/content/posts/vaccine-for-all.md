@@ -49,10 +49,8 @@ India is witnessing a massive surge in the number of cases. Definitely blame it 
 
 Everyone now, including famous journalists who are always quite critical of government, asks the Indian Govt to open vaccination for everyone. There are many reasons why it will not work if we open up vaccines for everyone in India. I'll talk about it in the below sections.
 
-<div align=center>
-
-https://twitter.com/BDUTT/status/1380005312782954502
-
+<div align="center">
+<blockquote class="twitter-tweet"><a href="https://twitter.com/BDUTT/status/1380005312782954502"></a></blockquote>
 </div>
 
 ### Vaccine Strategy

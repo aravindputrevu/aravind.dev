@@ -12,10 +12,8 @@ tags:
 
 Few days back, I asked a poll question about coding for under 13 kids. Some messaged me in reply and others voted. Majority voted "NO".
 
-<div align=center>
-
-https://twitter.com/aravindputrevu/status/1308747154932948998
-
+<div align="center">
+<blockquote class="twitter-tweet"><a href="https://twitter.com/aravindputrevu/status/1308747154932948998"></a></blockquote>
 </div>
 
 Now, Social Media, can be an echo chamber sometimes. 59 votes and 20 Direct messages might not be reflective of what a diverse nation like India thinks. 
@@ -43,7 +41,9 @@ While I appreciate the greater interest or outcome, I don't agree how an Indian 
 While I appreciate the greater interest or outcome, I don't agree how an Indian parent is looking at this as another avenue for coaching. Also, some marketing campaigns from these EdTech co's are cringeworthy. 
 
 
-https://www.youtube.com/watch?v=PjmGvPD5A7s
+<div align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PjmGvPD5A7s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 
 ### Why do I think coding should NOT be a tuition at a young age?
@@ -54,10 +54,8 @@ Kids under 13 years at their scholastic age have tremendous ability to grasp and
 
 There are also exceptions to this as mentioned below. But teaching to code with a coaching approach and without adequate creative thinking might make the kid to dissuade this field in future which could be far more dangerous. 
 
-<div align=center>
-
-https://twitter.com/xprilion/status/1308758974846525445
-
+<div align="center">
+<blockquote class="twitter-tweet"><a href="https://twitter.com/xprilion/status/1308758974846525445"></a></blockquote>
 </div>
 
 

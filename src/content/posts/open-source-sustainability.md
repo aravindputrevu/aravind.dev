@@ -45,7 +45,7 @@ However, over some time, most of the users attributed FOSS to only FREE and forg
 
 As a student from tier-2 city college, Open source has aided me in my learnings and helped me learn "***How to collaborate?***" - a critical soft skill in today's remote work world!
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Open source does not mean free or vice-versa. Anyone who doesn’t understand this doesn’t get open source.<br><br>Complaining that you pay for software and think it should all be free, as a software developer, is incredibly hypocritical. <a href="https://t.co/M4f9P7sAcD">https://t.co/M4f9P7sAcD</a></p>&mdash; Nick Craver (@Nick_Craver) <a href="https://twitter.com/Nick_Craver/status/1410555994447417345?ref_src=twsrc%5Etfw">July 1, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Open source does not mean free or vice-versa. Anyone who doesn't understand this doesn't get open source.<br><br>Complaining that you pay for software and think it should all be free, as a software developer, is incredibly hypocritical. <a href="https://t.co/M4f9P7sAcD">https://t.co/M4f9P7sAcD</a></p>&mdash; Nick Craver (@Nick_Craver) <a href="https://twitter.com/Nick_Craver/status/1410555994447417345?ref_src=twsrc%5Etfw">July 1, 2021</a></blockquote>
 
 ## Why is sustainability so crucial for an Open source project?
 
@@ -58,7 +58,7 @@ Then, how will the OSS projects' developers and maintainers continue to add good
 
 Not every project can be donated to a foundation, so the sustainability of that project could very well depend on how well you do on #2. You need to have a viable business model for a happy user community.
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">The moral of the story is, success at one layer doesn&#39;t guarantee success at another, or a viable business model.<br><br>The focus on what went wrong overshadows all the things that went right. <a href="https://t.co/AnXOJ8OF4x">https://t.co/AnXOJ8OF4x</a></p>&mdash; Kelsey Hightower (@kelseyhightower) <a href="https://twitter.com/kelseyhightower/status/1435251196818722821?ref_src=twsrc%5Etfw">September 7, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">The moral of the story is, success at one layer doesn&#39;t guarantee success at another, or a viable business model.<br><br>The focus on what went wrong overshadows all the things that went right. <a href="https://t.co/AnXOJ8OF4x">https://t.co/AnXOJ8OF4x</a></p>&mdash; Kelsey Hightower (@kelseyhightower) <a href="https://twitter.com/kelseyhightower/status/1435251196818722821?ref_src=twsrc%5Etfw">September 7, 2021</a></blockquote>
 
 ## Actions that we can take!
 

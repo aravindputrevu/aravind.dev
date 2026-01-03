@@ -1,0 +1,97 @@
+---
+// Navigation component - Brutalist style
+---
+
+<nav class="navbar" aria-label="Main navigation">
+  <div class="container">
+    <div class="flex">
+      <div>
+        <a href="/" class="brand" aria-label="Aravind Putrevu - Home">
+          Aravind Putrevu
+        </a>
+      </div>
+      <div class="flex nav-links">
+        <a href="/blog">Writing</a>
+        <a href="/archive">Archive</a>
+        <a href="/about">About</a>
+        <button id="dark-mode-button" aria-label="Toggle dark mode">●</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script is:inline>
+  (function() {
+    const btn = document.getElementById('dark-mode-button');
+    if (!btn) return;
+
+    // Update button icon based on current theme
+    function updateIcon() {
+      const isDark = document.documentElement.classList.contains('dark');
+      btn.textContent = isDark ? '○' : '●';
+    }
+
+    // Set initial icon
+    updateIcon();
+
+    // Handle click
+    btn.addEventListener('click', function() {
+      if (typeof window.toggleTheme === 'function') {
+        window.toggleTheme();
+        updateIcon();
+      }
+    });
+  })();
+</script>
+
+<style>
+  .navbar {
+    border-bottom: 1px solid var(--border);
+    background: var(--background);
+    box-shadow: none;
+  }
+
+  .navbar .flex {
+    justify-content: space-between;
+  }
+
+  .navbar a {
+    text-decoration: none;
+    color: var(--font-color);
+  }
+
+  .navbar a:hover {
+    opacity: 0.7;
+  }
+
+  .navbar a.brand {
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .navbar a.brand:hover {
+    text-decoration: none;
+  }
+
+  .nav-links {
+    gap: 1.5rem;
+  }
+
+  .nav-links a {
+    font-weight: 400;
+  }
+
+  #dark-mode-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--font-color);
+    padding: 0.25rem;
+  }
+
+  #dark-mode-button:hover {
+    opacity: 0.7;
+  }
+</style>

@@ -54,9 +54,12 @@ typings/
 # dotenv environment variable files
 .env*
 
-# gatsby files
+# gatsby files (legacy)
 .cache/
-public
+
+# astro files
+dist/
+.astro/
 
 # Mac files
 .DS_Store
@@ -70,3 +73,6 @@ yarn-error.log
 
 # firebase
 .firebase/hosting.cHVibGlj.cache
+
+# Claude Code settings
+.claude/

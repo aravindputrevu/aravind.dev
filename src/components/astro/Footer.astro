@@ -1,0 +1,72 @@
+---
+const currentDate = new Date();
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const lastUpdated = `${months[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="https://linkedin.com/in/aravindputrevu" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">LinkedIn</a>
+      <a href="https://www.devshorts.in" target="_blank" rel="noopener noreferrer" aria-label="Substack newsletter">Substack</a>
+      <a href="https://github.com/aravindputrevu" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">GitHub</a>
+      <a href="/archive" aria-label="Archive page">Archive</a>
+    </nav>
+    <span class="updated">Last updated {lastUpdated}</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+    padding: 1.25rem 0;
+  }
+
+  .footer-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .footer-nav a {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .footer-nav a:hover {
+    color: var(--heading-color);
+  }
+
+  .updated {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  @media screen and (max-width: 600px) {
+    .footer-inner {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .footer-nav {
+      gap: 1rem;
+    }
+
+    .footer-nav a,
+    .updated {
+      font-size: 0.85rem;
+    }
+  }
+</style>

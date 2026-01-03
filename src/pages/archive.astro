@@ -1,0 +1,132 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const allGuides = await getCollection('guides');
+const allPresentations = await getCollection('presentations');
+
+// Sort guides by date
+const sortedGuides = allGuides.sort((a, b) => {
+  return (b.data.date?.getTime() || 0) - (a.data.date?.getTime() || 0);
+});
+
+// Sort presentations by date
+const sortedPresentations = allPresentations.sort((a, b) => {
+  return (b.data.date?.getTime() || 0) - (a.data.date?.getTime() || 0);
+});
+---
+
+<BaseLayout title="Archive - Guides & Presentations | Aravind Putrevu" description="Technical guides and conference presentations">
+  <div class="container brutalist-page">
+    <header class="page-header">
+      <h1>ARCHIVE</h1>
+      <div class="separator"></div>
+      <p class="description">Technical guides and conference presentations.</p>
+    </header>
+
+    <section class="archive-section">
+      <h2>GUIDES</h2>
+      <div class="separator"></div>
+      <ul class="item-list">
+        {sortedGuides.map((item) => (
+          <li>
+            <span class="item-date">
+              {item.data.date ? item.data.date.getFullYear() : '—'}
+            </span>
+            <a href={`/${item.slug}`}>{item.data.title}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="archive-section">
+      <h2>PRESENTATIONS</h2>
+      <div class="separator"></div>
+      <ul class="item-list">
+        {sortedPresentations.map((item) => (
+          <li>
+            <span class="item-date">
+              {item.data.date ? item.data.date.getFullYear() : '—'}
+            </span>
+            <a href={`/${item.slug}`}>{item.data.title}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .brutalist-page {
+    max-width: 680px;
+    padding-top: 2rem;
+  }
+
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .separator {
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+  }
+
+  .description {
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .archive-section {
+    margin-bottom: 3rem;
+  }
+
+  .archive-section h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .item-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .item-list li {
+    display: flex;
+    align-items: baseline;
+    padding: 0.4rem 0;
+    gap: 1.5rem;
+  }
+
+  .item-date {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-family: var(--code-font-family);
+    min-width: 3rem;
+  }
+
+  .item-list a {
+    font-weight: 400;
+  }
+
+  @media screen and (min-width: 800px) {
+    .brutalist-page {
+      padding-top: 4rem;
+    }
+
+    .page-header h1 {
+      font-size: 1.8rem;
+    }
+  }
+</style>

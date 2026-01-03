@@ -1,0 +1,115 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const allPosts = await getCollection('posts', ({ data }) => {
+  return !data.hidden;
+});
+
+const sortedPosts = allPosts.sort((a, b) => {
+  return b.data.date.getTime() - a.data.date.getTime();
+});
+
+---
+
+<BaseLayout>
+  <div class="home">
+    <p class="intro">
+      I believe technology can change lives. Currently, growing CodeRabbit from early traction to market leadership. Previously developer advocacy at Elastic and engineering at McAfee.
+    </p>
+
+    <p class="links">
+      <a href="https://twitter.com/aravindputrevu">Twitter</a> ·
+      <a href="https://github.com/aravindputrevu">GitHub</a> ·
+      <a href="/about">About</a>
+    </p>
+
+    <section class="writing">
+      <h2>Writing</h2>
+
+      <ul class="posts">
+        {sortedPosts.map((post) => (
+          <li>
+            <a href={`/${post.slug}`}>{post.data.title}</a>
+            <span class="year">{post.data.date.getFullYear()}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .home {
+    max-width: 600px;
+    padding: 2rem 1.5rem 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .intro {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: 0.5rem;
+  }
+
+  .links {
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+  }
+
+  .links a {
+    text-decoration: none;
+    color: var(--text-muted);
+  }
+
+  .links a:hover {
+    color: var(--heading-color);
+  }
+
+  .writing h2 {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .posts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .posts li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.3rem 0;
+    gap: 1rem;
+  }
+
+  .posts a {
+    text-decoration: none;
+    flex: 1;
+    font-size: 0.95rem;
+  }
+
+  .posts a:hover {
+    text-decoration: underline;
+  }
+
+  .year {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  @media screen and (min-width: 800px) {
+    .home {
+      padding-top: 3rem;
+    }
+  }
+</style>

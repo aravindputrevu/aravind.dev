@@ -1,0 +1,169 @@
+/* Dark Mode - Digital Newsprint */
+
+:root {
+  /* Core colors */
+  --background: #111111;
+  --font-color: #EEEEEE;
+  --heading-color: #FFFFFF;
+  --text-muted: #999999;
+
+  /* Legacy mappings for compatibility */
+  --dark-font-color: #EEEEEE;
+  --medium-font-color: #CCCCCC;
+  --light-font-color: #999999;
+  --light-background: #1A1A1A;
+  --lighter-background: #222222;
+  --border: #333333;
+
+  /* Links - brutalist style (same color, underlined) */
+  --link-color: #EEEEEE;
+  --link-color-darker: #FFFFFF;
+
+  /* UI elements */
+  --navbar-color: #0A0A0A;
+  --blockquote: #1A1A1A;
+  --transparent-text: rgba(255, 255, 255, 0.7);
+  --transparent-bg: rgba(255, 255, 255, 0.05);
+  --light-transparent-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* Headings */
+h1 {
+  color: var(--heading-color);
+}
+
+h2,
+h3,
+h4 {
+  color: var(--font-color);
+}
+
+/* Navbar */
+.navbar {
+  box-shadow: none;
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar a {
+  color: var(--transparent-text);
+}
+
+.navbar a:hover,
+.navbar a[aria-current='page'] {
+  color: white;
+}
+
+.navbar a.brand {
+  color: white;
+}
+
+/* Links */
+a {
+  color: var(--link-color);
+}
+
+a:hover {
+  color: var(--link-color-darker);
+}
+
+/* Tags */
+a[class^='tag-'] {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--link-color);
+}
+
+a[class^='tag-']:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* Buttons */
+a.button {
+  border: 1px solid var(--border);
+  color: white;
+  background: var(--lighter-background);
+}
+
+a.button:hover {
+  border: 1px solid var(--light-font-color);
+  background: var(--light-background);
+}
+
+a.button.secondary {
+  border-color: var(--lighter-background);
+  background: var(--lighter-background);
+  color: white;
+}
+
+/* Code blocks */
+.filename {
+  background: var(--light-background) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--font-color) !important;
+}
+
+pre.language-terminal {
+  background: var(--navbar-color);
+  border: 1px solid var(--border);
+}
+
+pre.language-terminal::before {
+  border-bottom: 1px solid var(--border);
+  background: var(--light-background) !important;
+  color: inherit;
+}
+
+code.language-terminal {
+  color: var(--font-color);
+}
+
+/* Forms */
+[type='search'] {
+  border: 1px solid var(--border);
+  background: var(--light-background);
+  color: var(--font-color);
+}
+
+[type='search']:focus {
+  outline: none;
+  border: 1px solid var(--light-font-color);
+}
+
+/* Tables */
+table,
+td,
+th {
+  border-color: var(--border);
+}
+
+tbody tr:nth-child(odd) {
+  background-color: var(--light-background);
+}
+
+/* Blockquotes */
+blockquote {
+  color: var(--font-color);
+  background: var(--blockquote);
+  border-left-color: var(--light-font-color);
+}
+
+/* Selection */
+::selection {
+  background: #EEEEEE;
+  color: #111111;
+}
+
+/* Tags and badges */
+.new-post {
+  background: #333333;
+  color: white;
+}
+
+.tags > a {
+  background: var(--light-background);
+  color: var(--font-color);
+}
+
+.tags > a:hover {
+  background: var(--lighter-background);
+}

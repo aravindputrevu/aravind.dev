@@ -1,0 +1,131 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.hidden);
+  const guides = await getCollection('guides');
+
+  // Collect all unique tags
+  const allTags = new Set<string>();
+  [...posts, ...guides].forEach(entry => {
+    if (entry.data.tags) {
+      entry.data.tags.forEach((tag: string) => allTags.add(tag.toLowerCase()));
+    }
+  });
+
+  // Generate paths for each tag
+  return Array.from(allTags).map(tag => ({
+    params: { tag },
+    props: { tag }
+  }));
+}
+
+const { tag } = Astro.props;
+
+// Get all posts and guides with this tag
+const posts = await getCollection('posts', ({ data }) => !data.hidden);
+const guides = await getCollection('guides');
+
+const allContent = [...posts, ...guides].filter(entry =>
+  entry.data.tags?.some((t: string) => t.toLowerCase() === tag)
+);
+
+// Sort by date (newest first)
+const sortedContent = allContent.sort((a, b) => {
+  const dateA = a.data.date ? new Date(a.data.date).getTime() : 0;
+  const dateB = b.data.date ? new Date(b.data.date).getTime() : 0;
+  return dateB - dateA;
+});
+
+const displayTag = tag.charAt(0).toUpperCase() + tag.slice(1);
+---
+
+<BaseLayout title={`Posts tagged "${displayTag}" - Aravind Putrevu`} description={`All posts tagged with ${displayTag}`}>
+  <div class="container tag-page">
+    <header>
+      <h1>Tagged: {displayTag}</h1>
+      <p class="count">{sortedContent.length} {sortedContent.length === 1 ? 'post' : 'posts'}</p>
+    </header>
+
+    <ul class="posts">
+      {sortedContent.map((entry) => (
+        <li>
+          <a href={`/${entry.slug}`}>{entry.data.title}</a>
+          {entry.data.date && (
+            <span class="year">{new Date(entry.data.date).getFullYear()}</span>
+          )}
+        </li>
+      ))}
+    </ul>
+
+    <a href="/blog" class="back-link">← Back to all posts</a>
+  </div>
+</BaseLayout>
+
+<style>
+  .tag-page {
+    max-width: 600px;
+    padding: 2rem 1.5rem 0;
+    margin: 0 auto;
+  }
+
+  header {
+    margin-bottom: 2rem;
+  }
+
+  header h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .count {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .posts {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+  }
+
+  .posts li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.3rem 0;
+    gap: 1rem;
+  }
+
+  .posts a {
+    text-decoration: none;
+    flex: 1;
+    font-size: 0.95rem;
+  }
+
+  .posts a:hover {
+    text-decoration: underline;
+  }
+
+  .year {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    color: var(--font-color);
+  }
+
+  @media screen and (min-width: 800px) {
+    .tag-page {
+      padding-top: 3rem;
+    }
+  }
+</style>

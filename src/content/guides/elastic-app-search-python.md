@@ -315,7 +315,7 @@ Let us switch over to the `docker` branch.
 $ git checkout docker
 ```
 
-You should see `Dockerfile` and `docker-compose.yml` which helps build a container for the application. [Visual Studio Code Docker Extension] (https://code.visualstudio.com/docs/containers/overview) can help you to build Dockerfile for the application. 
+You should see `Dockerfile` and `docker-compose.yml` which helps build a container for the application. [Visual Studio Code Docker Extension](https://code.visualstudio.com/docs/containers/overview) can help you to build Dockerfile for the application. 
 
 ![dockerfile](/images/post-images/elastic-app-search-python/image32.png)
 

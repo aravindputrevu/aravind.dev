@@ -58,12 +58,43 @@ const {
     </main>
     <Footer />
 
-    <script>
-      // Dark mode toggle
-      const theme = localStorage.getItem('theme');
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      }
+    <script is:inline>
+      // Dark mode initialization and toggle API
+      (function() {
+        function loadDarkCSS() {
+          if (!document.getElementById('dark-mode-css')) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.id = 'dark-mode-css';
+            link.href = '/dark.css';
+            document.head.appendChild(link);
+          }
+        }
+
+        function unloadDarkCSS() {
+          var link = document.getElementById('dark-mode-css');
+          if (link) link.remove();
+        }
+
+        // Initialize on page load
+        var theme = localStorage.getItem('theme');
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+          loadDarkCSS();
+        }
+
+        // Expose global toggle function
+        window.toggleTheme = function() {
+          var isDark = document.documentElement.classList.toggle('dark');
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+          if (isDark) {
+            loadDarkCSS();
+          } else {
+            unloadDarkCSS();
+          }
+          return isDark;
+        };
+      })();
     </script>
 
     <!-- Twitter embeds -->

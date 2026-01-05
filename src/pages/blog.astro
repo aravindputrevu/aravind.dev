@@ -123,4 +123,37 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
       font-size: 1.8rem;
     }
   }
+
+  /* Mobile optimizations */
+  @media screen and (max-width: 600px) {
+    .brutalist-page {
+      padding-top: 1.5rem;
+    }
+
+    .page-header h1 {
+      font-size: 1.3rem;
+    }
+
+    .post-date {
+      min-width: 3.5rem;
+    }
+
+    .post-list li {
+      gap: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .brutalist-page {
+      padding-top: 1.25rem;
+    }
+
+    .page-header h1 {
+      font-size: 1.2rem;
+    }
+
+    .post-date {
+      font-size: 0.8rem;
+    }
+  }
 </style>

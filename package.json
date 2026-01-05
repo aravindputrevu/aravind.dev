@@ -4,7 +4,6 @@
   "version": "2.0.0",
   "type": "module",
   "description": "Personal website running on Astro and Node.js.",
-  "original-author": "Tania Rascia",
   "author": "Aravind Putrevu",
   "license": "MIT",
   "scripts": {

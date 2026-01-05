@@ -112,4 +112,37 @@ const sortedPosts = allPosts.sort((a, b) => {
       padding-top: 3rem;
     }
   }
+
+  /* Mobile optimizations */
+  @media screen and (max-width: 600px) {
+    .home {
+      padding: 1.5rem 1rem 0;
+    }
+
+    .intro {
+      font-size: 0.9rem;
+    }
+
+    .links {
+      font-size: 0.85rem;
+    }
+
+    .posts a {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .home {
+      padding: 1.25rem 0.875rem 0;
+    }
+
+    .intro {
+      font-size: 0.875rem;
+    }
+
+    .posts li {
+      padding: 0.25rem 0;
+    }
+  }
 </style>

@@ -167,4 +167,29 @@ const timeline = [
       min-width: auto;
     }
   }
+
+  /* Mobile optimizations */
+  @media screen and (max-width: 600px) {
+    .about {
+      padding: 1.5rem 1rem 0;
+    }
+
+    .timeline-item {
+      gap: 1rem;
+    }
+
+    .timeline-item .year {
+      min-width: 70px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .about {
+      padding: 1.25rem 0.875rem 0;
+    }
+
+    .connect .links {
+      gap: 1rem;
+    }
+  }
 </style>

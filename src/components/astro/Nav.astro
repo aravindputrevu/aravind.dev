@@ -94,4 +94,36 @@
   #dark-mode-button:hover {
     opacity: 0.7;
   }
+
+  /* Mobile touch targets */
+  @media screen and (max-width: 600px) {
+    .nav-links {
+      gap: 0.75rem;
+    }
+
+    .nav-links a {
+      padding: 0.5rem;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
+    #dark-mode-button {
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .nav-links {
+      gap: 0.5rem;
+    }
+
+    .navbar a.brand {
+      font-size: 0.95rem;
+    }
+  }
 </style>

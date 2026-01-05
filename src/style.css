@@ -121,6 +121,27 @@ section > h2 {
   }
 }
 
+/* Mobile section spacing */
+@media screen and (max-width: 600px) {
+  section {
+    margin: 1.5rem 0;
+  }
+
+  section > h2 {
+    font-size: 1.5rem;
+  }
+
+  .section-button {
+    margin-left: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  section {
+    margin: 1.25rem 0;
+  }
+}
+
 .container {
   max-width: 825px;
   padding: 0 1.5rem;
@@ -135,6 +156,24 @@ section > h2 {
 @media screen and (min-width: 800px) {
   .container {
     padding: 0 2rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 0 0.875rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .container {
+    padding: 0 0.75rem;
   }
 }
 
@@ -334,6 +373,58 @@ h5 {
 
   h3 code {
     font-size: 1.6rem !important;
+  }
+}
+
+/* Mobile typography scaling */
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  h4 {
+    font-size: 1.15rem;
+  }
+
+  p,
+  ol,
+  ul,
+  dl,
+  table,
+  blockquote {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
   }
 }
 
@@ -548,6 +639,40 @@ a.button.secondary:hover {
   }
 }
 
+/* Mobile lead section */
+@media screen and (max-width: 600px) {
+  .lead {
+    padding: 1.75rem 0;
+  }
+
+  .lead h1 {
+    font-size: 1.4rem;
+  }
+
+  .lead p {
+    font-size: 1rem;
+  }
+
+  .lead img {
+    height: 120px;
+    width: 120px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .lead {
+    padding: 1.5rem 0;
+  }
+
+  .lead h1 {
+    font-size: 1.3rem;
+  }
+
+  a.button {
+    padding: 0.65rem 0.9rem;
+  }
+}
+
 p.subtitle {
   color: var(--medium-font-color);
   font-size: 1.3rem;
@@ -669,6 +794,36 @@ main {
   .navbar a {
     font-size: 0.95rem;
     padding: 0.5rem;
+  }
+}
+
+/* Mobile navbar touch targets */
+@media screen and (max-width: 600px) {
+  .navbar a {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.4rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar {
+    padding: 0.4rem;
+  }
+
+  .navbar a {
+    padding: 0.4rem 0.3rem;
+  }
+
+  .navbar a.brand {
+    font-size: 0.95rem;
   }
 }
 

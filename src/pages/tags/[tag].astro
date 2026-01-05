@@ -5,39 +5,33 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.hidden);
   const guides = await getCollection('guides');
+  const allContent = [...posts, ...guides];
 
   // Collect all unique tags
   const allTags = new Set<string>();
-  [...posts, ...guides].forEach(entry => {
+  allContent.forEach(entry => {
     if (entry.data.tags) {
       entry.data.tags.forEach((tag: string) => allTags.add(tag.toLowerCase()));
     }
   });
 
-  // Generate paths for each tag
+  // Generate paths for each tag with filtered/sorted content
   return Array.from(allTags).map(tag => ({
     params: { tag },
-    props: { tag }
+    props: {
+      tag,
+      content: allContent
+        .filter(entry => entry.data.tags?.some((t: string) => t.toLowerCase() === tag))
+        .sort((a, b) => {
+          const dateA = a.data.date ? new Date(a.data.date).getTime() : 0;
+          const dateB = b.data.date ? new Date(b.data.date).getTime() : 0;
+          return dateB - dateA;
+        })
+    }
   }));
 }
 
-const { tag } = Astro.props;
-
-// Get all posts and guides with this tag
-const posts = await getCollection('posts', ({ data }) => !data.hidden);
-const guides = await getCollection('guides');
-
-const allContent = [...posts, ...guides].filter(entry =>
-  entry.data.tags?.some((t: string) => t.toLowerCase() === tag)
-);
-
-// Sort by date (newest first)
-const sortedContent = allContent.sort((a, b) => {
-  const dateA = a.data.date ? new Date(a.data.date).getTime() : 0;
-  const dateB = b.data.date ? new Date(b.data.date).getTime() : 0;
-  return dateB - dateA;
-});
-
+const { tag, content: sortedContent } = Astro.props;
 const displayTag = tag.charAt(0).toUpperCase() + tag.slice(1);
 ---
 

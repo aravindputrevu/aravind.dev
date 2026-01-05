@@ -800,8 +800,8 @@ main {
 /* Mobile navbar touch targets */
 @media screen and (max-width: 600px) {
   .navbar a {
-    font-size: 0.9rem;
-    padding: 0.5rem 0.4rem;
+    font-size: 0.85rem;
+    padding: 0.4rem;
     min-height: 44px;
     display: flex;
     align-items: center;
@@ -819,11 +819,34 @@ main {
   }
 
   .navbar a {
-    padding: 0.4rem 0.3rem;
+    padding: 0.3rem;
+    font-size: 0.8rem;
   }
 
   .navbar a.brand {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+  }
+
+  .navbar button {
+    min-width: 40px;
+    min-height: 40px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .navbar a {
+    padding: 0.25rem;
+    font-size: 0.75rem;
+  }
+
+  .navbar a.brand {
+    font-size: 0.85rem;
+  }
+
+  .navbar button {
+    min-width: 36px;
+    min-height: 36px;
+    font-size: 0.9rem;
   }
 }
 
